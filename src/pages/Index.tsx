@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -8,6 +7,7 @@ import Achievements from "@/components/Achievements";
 import OpenSource from "@/components/OpenSource";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -83,6 +83,7 @@ const Index = () => {
         <Contact />
       </main>
       <Footer />
+      <ThemeSwitcher />
       
       {/* Back to top button */}
       <a 
