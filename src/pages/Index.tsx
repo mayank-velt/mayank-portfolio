@@ -8,7 +8,7 @@ import Achievements from "@/components/Achievements";
 import OpenSource from "@/components/OpenSource";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
+import ThreeBackground from "@/components/ThreeBackground";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -74,6 +74,9 @@ const Index = () => {
         whileInView={{ opacity: 0.5 }}
       />
       
+      {/* Three.js animated background */}
+      <ThreeBackground />
+      
       <Header />
       <main>
         <Hero />
@@ -84,9 +87,8 @@ const Index = () => {
         <Contact />
       </main>
       <Footer />
-      <ThemeSwitcher />
       
-      {/* Back to top button - moved to left side to avoid theme switcher */}
+      {/* Back to top button */}
       <a 
         href="#" 
         className="fixed bottom-8 left-8 p-3 bg-primary text-white rounded-full shadow-lg hidden md:flex items-center justify-center hover:bg-primary/90 transition-all z-20"

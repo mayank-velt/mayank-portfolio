@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Twitter, Mail, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -80,7 +81,12 @@ const Header = () => {
               </li>
             ))}
           </ul>
+          
           <div className="flex items-center gap-4">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+            
+            {/* Social Icons */}
             {socials.map((social, index) => (
               <a 
                 key={index}
@@ -97,13 +103,16 @@ const Header = () => {
         </nav>
 
         {/* Mobile menu button */}
-        <button 
-          className="md:hidden text-foreground"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <Menu size={24} />
-        </button>
+        <div className="md:hidden flex items-center gap-4">
+          <ThemeToggle />
+          <button 
+            className="text-foreground"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            <Menu size={24} />
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}
