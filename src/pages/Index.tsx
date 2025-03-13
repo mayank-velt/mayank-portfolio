@@ -91,7 +91,7 @@ const Index = () => {
       {/* Back to top button */}
       <a 
         href="#" 
-        className="fixed bottom-8 left-8 p-3 bg-primary text-white rounded-full shadow-lg hidden md:flex items-center justify-center hover:bg-primary/90 transition-all z-20"
+        className="fixed bottom-8 right-8 p-3 bg-primary text-white rounded-full shadow-lg hidden md:flex items-center justify-center hover:bg-primary/90 transition-all z-20"
         aria-label="Back to top"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

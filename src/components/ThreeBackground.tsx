@@ -2,7 +2,6 @@
 import { useRef, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useThemeStore } from '@/stores/useThemeStore';
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Floating particle that follows a noise pattern
@@ -132,10 +131,9 @@ const MouseMovementEffect = ({ mouseSensitivity = 0.1 }) => {
 const ThreeBackground = () => {
   return (
     <div className="fixed inset-0 -z-10 opacity-60">
-      <Canvas gl={{ antialias: true, alpha: true }}>
+      <Canvas>
         <ambientLight intensity={0.2} />
         <directionalLight position={[10, 10, 10]} intensity={1} />
-        <PerspectiveCamera makeDefault position={[0, 0, 10]} fov={50} />
         <MouseMovementEffect mouseSensitivity={0.1} />
         <ParticleField />
       </Canvas>

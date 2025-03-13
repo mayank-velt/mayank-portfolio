@@ -1,7 +1,7 @@
 
 import { useThemeStore } from "@/stores/useThemeStore";
 import { motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 // Theme definitions
 const themes = [
@@ -30,7 +30,6 @@ const themes = [
 const ThemeToggle = () => {
   const { theme, setTheme } = useThemeStore();
   const [hoveredTheme, setHoveredTheme] = useState<string | null>(null);
-  const tooltipRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="flex items-center gap-2">
@@ -57,7 +56,6 @@ const ThemeToggle = () => {
           
           {hoveredTheme === t.name && (
             <motion.div
-              ref={tooltipRef}
               className="absolute top-6 left-1/2 transform -translate-x-1/2 bg-background/80 backdrop-blur-sm px-2 py-1 rounded text-xs font-medium shadow-md pointer-events-none z-50"
               initial={{ opacity: 0, y: -5 }}
               animate={{ opacity: 1, y: 0 }}
