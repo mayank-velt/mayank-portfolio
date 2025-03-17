@@ -9,6 +9,11 @@ import OpenSource from "@/components/OpenSource";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import Projects from "@/components/Projects";
+import Skills from "@/components/Skills";
+import Blogs from "@/components/Blogs";
+import TechTalks from "@/components/TechTalks";
+import Hobbies from "@/components/Hobbies";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -78,8 +83,13 @@ const Index = () => {
         <Hero />
         <About />
         <Experience />
+        <Skills />
+        <Projects />
         <Achievements />
         <OpenSource />
+        <Blogs />
+        <TechTalks />
+        <Hobbies />
         <Contact />
       </main>
       <Footer />

@@ -1,5 +1,6 @@
 
 import { motion } from "framer-motion";
+import { Mail, MapPin, Phone, Github, Linkedin, Twitter } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -32,11 +33,68 @@ const Hero = () => {
               </h2>
             </motion.div>
             
+            <motion.div
+              className="flex flex-wrap gap-4 text-muted-foreground"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <div className="flex items-center gap-2">
+                <Phone size={16} className="text-primary" />
+                <span>7620415699</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin size={16} className="text-primary" />
+                <span>Pune, India</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail size={16} className="text-primary" />
+                <a href="mailto:pagarmayank07@gmail.com" className="hover:text-primary transition-colors">
+                  pagarmayank07@gmail.com
+                </a>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              className="flex gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <a 
+                href="https://linkedin.com/in/mayank-pagar" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+                aria-label="LinkedIn Profile"
+              >
+                <Linkedin size={18} />
+              </a>
+              <a 
+                href="https://github.com/mayank-96" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+                aria-label="GitHub Profile"
+              >
+                <Github size={18} />
+              </a>
+              <a 
+                href="https://twitter.com/mayankp09_" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+                aria-label="Twitter Profile"
+              >
+                <Twitter size={18} />
+              </a>
+            </motion.div>
+            
             <motion.p 
               className="text-lg text-muted-foreground max-w-2xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
               My passion for software lies with dreaming up ideas and making them come true with elegant pixel-perfect interfaces. I take great care in the experience, architecture, and code quality of the things I build.
             </motion.p>

@@ -6,14 +6,39 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const experiences = [
   {
-    id: "geekyants-se",
+    id: "velt",
+    company: "Velt [YC W22]",
+    title: "Founding UI Engineer",
+    period: "12/2023 – Present",
+    location: "Remote (India)",
+    responsibilities: [
+      "Solely developed and launched a collaborative File Drive (Lottie, PDF, image, video) with custom media players, driving a 10% revenue increase.",
+      "Refactored legacy onboarding code for Superflow, reducing bugs by 99% through improved logic.",
+      "Introduced a \"wireframes\" architecture, providing users with fully Customizable Components within a framework-agnostic collaboration SDK, and driving a 6x revenue growth.",
+      "Developed a comprehensive Theming system, reducing user implementation time by 80% through customizable colors, spacing, and fonts.",
+      "Enhanced SDK accessibility and globalization via ARIA, test IDs, and internalization.",
+      "Implemented in-product Video Trimming Editor."
+    ]
+  },
+  {
+    id: "geekyants-se3",
     company: "GeekyAnts",
-    title: "Software Engineer",
-    period: "07/2022 – present",
+    title: "Software Engineer - III",
+    period: "07/2023 – 12/2023",
     location: "Bangalore, India",
     responsibilities: [
-      "Collaborated on the development of a performant Universal component library for both React and React Native environment.",
-      "Built a Figma plugin which generates a design system from storybook with a single click, reducing designers effort time by 99% and maintaining single source of truth between Figma and the component library.",
+      "Developed an internal Figma plugin that auto-generates a design system from Storybook, supporting complex features like auto layout, reducing designer effort by 99%. The resulting auto-generated Figma file achieved 114 likes and 6.2k users.",
+      "Developed the GlueStack Figma plugin, enabling batch updates for color palette alpha tokens and font families, streamlining design consistency and workflow, and achieving 28 likes and 1.3k users."
+    ]
+  },
+  {
+    id: "geekyants-se1",
+    company: "GeekyAnts",
+    title: "Software Engineer - I",
+    period: "07/2022 – 07/2023",
+    location: "Bangalore, India",
+    responsibilities: [
+      "Co-created a performant Universal component library GlueStack for React and React Native environments, achieving 3.5k GitHub stars and 14k monthly npm users.",
       "Led a project by handling setup, fixing bugs, reviewing code, and improving code structure with a small team.",
       "Developed a Plugin System for a framework which generates different targets from a single storybook."
     ]
@@ -23,7 +48,7 @@ const experiences = [
     company: "GeekyAnts",
     title: "Software Engineer Intern",
     period: "11/2021 – 07/2022",
-    location: "Bangalore, India",
+    location: "Banglore, India",
     responsibilities: [
       "Worked on NativeBase core, a widely adopted UI library with over 65 K+ weekly downloads and 18K+ Github stars.",
       "Actively maintained and improved the library by resolving Github issues and enhancing its functionality for exceptional user experience."

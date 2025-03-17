@@ -3,14 +3,6 @@ import { motion } from "framer-motion";
 import { CodeIcon, Heart, Cpu, Zap, Sparkles } from "lucide-react";
 
 const About = () => {
-  const skills = [
-    { name: "React", level: 90 },
-    { name: "React Native", level: 85 },
-    { name: "TypeScript", level: 80 },
-    { name: "Node.js", level: 75 },
-    { name: "UI/UX Design", level: 70 },
-  ];
-
   return (
     <section id="about" className="py-24 relative">
       <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-background to-transparent"></div>
@@ -42,26 +34,18 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-2xl font-bold">My Expertise</h3>
+            <h3 className="text-2xl font-bold">My Approach</h3>
             
-            <div className="grid grid-cols-1 gap-6">
-              {skills.map((skill, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="font-medium">{skill.name}</span>
-                    <span className="text-muted-foreground">{skill.level}%</span>
-                  </div>
-                  <div className="h-2 bg-muted rounded-full overflow-hidden">
-                    <motion.div 
-                      className="h-full bg-primary"
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: index * 0.1 }}
-                    />
-                  </div>
-                </div>
-              ))}
+            <div className="text-muted-foreground space-y-4">
+              <p>
+                My passion for software lies with dreaming up ideas and making them come true with elegant pixel-perfect interfaces. I take great care in the experience, architecture, and code quality of the things I build.
+              </p>
+              <p>
+                With expertise across front-end and back-end development, I bring a holistic perspective to creating software solutions that not only meet functional requirements but also deliver exceptional user experiences.
+              </p>
+              <p>
+                I enjoy collaborating with teams to solve complex problems and am always eager to learn new technologies and methodologies to enhance my skill set.
+              </p>
             </div>
           </motion.div>
           
