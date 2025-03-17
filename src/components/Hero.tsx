@@ -1,10 +1,54 @@
 
 import { Code } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const Hero = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const northernLightsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      setMousePosition({ x, y });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (northernLightsRef.current) {
+      const { x, y } = mousePosition;
+      const xOffset = (x - 50) * 0.02;
+      const yOffset = (y - 50) * 0.02;
+      northernLightsRef.current.style.transform = `translate(${xOffset}rem, ${yOffset}rem)`;
+    }
+  }, [mousePosition]);
+
   return (
-    <section id="hero" className="pt-32 pb-16 md:py-32 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-8">
+    <section id="hero" className="relative pt-32 pb-16 md:py-32 overflow-hidden">
+      {/* Northern Lights Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div 
+          ref={northernLightsRef}
+          className="absolute inset-0 transition-transform duration-300 ease-out"
+          style={{ 
+            filter: "blur(80px)",
+            opacity: 0.4,
+            willChange: "transform"
+          }}
+        >
+          <div className="absolute top-[-10%] left-[10%] w-[40%] h-[40%] rounded-full bg-[#8B5CF6] opacity-70"></div>
+          <div className="absolute top-[20%] left-[20%] w-[60%] h-[40%] rounded-full bg-[#0EA5E9] opacity-60"></div>
+          <div className="absolute top-[5%] right-[15%] w-[45%] h-[40%] rounded-full bg-[#F2FCE2] opacity-30"></div>
+          <div className="absolute bottom-[10%] left-[25%] w-[50%] h-[50%] rounded-full bg-[#D3E4FD] opacity-50"></div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-6">
             <p className="font-mono text-sm uppercase tracking-wider text-primary animate-fade-in">
@@ -31,13 +75,13 @@ const Hero = () => {
             <div className="flex flex-wrap gap-4 mt-10 animate-fade-in delay-500">
               <a 
                 href="#contact" 
-                className="px-8 py-3 bg-primary text-white font-medium uppercase tracking-wide inline-flex items-center transition-transform hover:translate-y-[-2px]"
+                className="px-8 py-3 bg-primary text-white font-medium uppercase tracking-wide inline-flex items-center transition-transform hover:translate-y-[-2px] rounded-md"
               >
                 Contact Me
               </a>
               <a 
                 href="#projects" 
-                className="px-8 py-3 border border-foreground bg-transparent text-foreground font-medium uppercase tracking-wide transition-transform hover:translate-y-[-2px]"
+                className="px-8 py-3 border border-foreground bg-transparent text-foreground font-medium uppercase tracking-wide transition-transform hover:translate-y-[-2px] rounded-md"
               >
                 View Work
               </a>
@@ -45,9 +89,9 @@ const Hero = () => {
           </div>
           
           <div className="lg:col-span-5 relative animate-fade-in delay-300">
-            <div className="bg-secondary/50 p-6 lg:p-8 rounded-sm relative z-10">
+            <div className="bg-background/70 backdrop-blur-sm p-6 lg:p-8 rounded-lg shadow-lg relative z-10 border border-primary/10">
               <div className="flex items-start gap-3 mb-4">
-                <div className="p-2 bg-primary/10 rounded-sm">
+                <div className="p-2 bg-primary/10 rounded-full">
                   <Code className="text-primary" size={24} />
                 </div>
                 <p className="text-sm font-mono opacity-70 pt-1.5">developer.profile</p>
@@ -92,7 +136,7 @@ const Hero = () => {
               </div>
             </div>
             
-            <div className="absolute -bottom-4 -right-4 w-full h-full bg-primary/10 rounded-sm -z-10"></div>
+            <div className="absolute -bottom-4 -right-4 w-full h-full bg-gradient-to-br from-primary/10 to-transparent rounded-lg -z-10 blur-sm"></div>
           </div>
         </div>
       </div>
