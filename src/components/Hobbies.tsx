@@ -19,7 +19,7 @@ const Hobbies = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-anton uppercase mb-6">
             <span className="text-primary">Hobbies</span> & Interests
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -36,29 +36,31 @@ const Hobbies = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="flex items-center gap-4 mb-8">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
                 <Video className="text-primary" size={24} />
               </div>
               <h3 className="text-2xl font-bold">Video Editing</h3>
             </div>
             
-            <div className="bg-card rounded-lg border border-border overflow-hidden shadow-sm">
-              <div className="p-6">
+            <div className="relative p-px overflow-hidden rounded-lg bg-gradient-to-br from-primary/30 via-primary/20 to-transparent">
+              <div className="bg-background backdrop-blur-sm p-6 rounded-lg">
                 <h4 className="text-xl font-bold mb-4">Peaky Blinders || Thomas Shelby || Experience</h4>
                 <p className="text-muted-foreground mb-6">
                   I make edits of TV shows and films that I like, combining visual storytelling with creative editing techniques.
                 </p>
                 
                 <div className="flex justify-center">
-                  <a 
+                  <motion.a 
                     href="https://www.youtube.com/watch?v=aHXhtOFzseE"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary/90 transition-colors"
+                    className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-primary to-primary/80 text-white font-medium hover:shadow-lg transition-all"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     Watch on YouTube
                     <ExternalLink size={16} className="ml-2" />
-                  </a>
+                  </motion.a>
                 </div>
               </div>
             </div>
@@ -72,7 +74,7 @@ const Hobbies = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="flex items-center gap-4 mb-8">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
                 <Palette className="text-primary" size={24} />
               </div>
               <h3 className="text-2xl font-bold">Sketching</h3>
@@ -86,13 +88,13 @@ const Hobbies = () => {
               {[1, 2, 3].map((item) => (
                 <motion.div
                   key={item}
-                  className="bg-card rounded-lg border border-border overflow-hidden shadow-sm"
+                  className="relative p-px overflow-hidden rounded-lg bg-gradient-to-br from-primary/30 via-primary/20 to-transparent"
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.2 + (item * 0.1) }}
                 >
-                  <div className="aspect-square bg-muted flex items-center justify-center">
+                  <div className="aspect-square bg-background/50 backdrop-blur-sm flex items-center justify-center rounded-lg">
                     <Palette size={48} className="text-muted-foreground/50" />
                   </div>
                 </motion.div>

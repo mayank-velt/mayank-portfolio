@@ -47,7 +47,7 @@ const Skills = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-anton uppercase mb-6">
             Technical <span className="text-primary">Skills</span>
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -59,32 +59,35 @@ const Skills = () => {
           {skillCategories.map((category, categoryIndex) => (
             <motion.div 
               key={category.name}
-              className="bg-card border border-border rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-primary/10 rounded-md flex items-center justify-center">
-                  <category.icon className="text-primary" size={20} />
+              <div className="relative p-px overflow-hidden rounded-lg bg-gradient-to-br from-primary/30 via-primary/20 to-transparent h-full">
+                <div className="bg-background backdrop-blur-sm p-6 rounded-lg h-full">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                      <category.icon className="text-primary" size={20} />
+                    </div>
+                    <h3 className="text-xl font-bold">{category.name}</h3>
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill, index) => (
+                      <motion.span
+                        key={skill}
+                        className="inline-block px-3 py-1 bg-secondary/50 backdrop-blur-sm rounded-full text-sm font-medium"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: 0.2 + (index * 0.05) }}
+                      >
+                        {skill}
+                      </motion.span>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold">{category.name}</h3>
-              </div>
-              
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill, index) => (
-                  <motion.span
-                    key={skill}
-                    className="inline-block px-3 py-1 bg-secondary rounded-full text-sm font-medium"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: 0.2 + (index * 0.05) }}
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
               </div>
             </motion.div>
           ))}

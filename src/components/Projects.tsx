@@ -1,5 +1,6 @@
 
 import { ExternalLink, Github, Chrome, Code, Database, Library } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Projects = () => {
   const categories = [
@@ -90,47 +91,58 @@ const Projects = () => {
           <div className="space-y-24">
             {categories.map((category, categoryIndex) => (
               <div key={category.name} className="space-y-10">
-                <h3 className="inline-block text-3xl font-anton uppercase relative after:absolute after:w-1/2 after:h-1 after:bg-primary after:bottom-0 after:left-0">
-                  {category.name}
-                </h3>
+                <motion.h3 
+                  className="inline-block text-3xl font-anton uppercase relative"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <span className="relative after:absolute after:w-full after:h-0.5 after:bg-primary after:bottom-0 after:left-0">
+                    {category.name}
+                  </span>
+                </motion.h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {category.projects.map((project, projectIndex) => (
-                    <div
+                    <motion.div
                       key={project.title}
-                      className="group relative"
+                      className="group"
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: projectIndex * 0.1 }}
                     >
-                      {/* Background decoration */}
-                      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent -z-10 transform group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-300"></div>
-                      
-                      <div className="bg-background border border-border hover:border-primary/50 transition-colors p-6 h-full flex flex-col">
-                        <div className="mb-4 flex items-start justify-between">
-                          <div className="flex items-center gap-3">
-                            <div className={`w-10 h-10 ${project.color} rounded-sm flex items-center justify-center`}>
-                              <project.icon size={20} className="text-white" />
+                      <div className="relative p-px overflow-hidden rounded-lg bg-gradient-to-br from-primary/30 via-primary/20 to-transparent">
+                        <div className="bg-background p-6 h-full flex flex-col rounded-lg backdrop-blur-sm">
+                          <div className="mb-4 flex items-start justify-between">
+                            <div className="flex items-center gap-3">
+                              <div className={`w-10 h-10 ${project.color} rounded-full flex items-center justify-center`}>
+                                <project.icon size={20} className="text-white" />
+                              </div>
+                              <h4 className="text-xl font-bold">{project.title}</h4>
                             </div>
-                            <h4 className="text-xl font-bold">{project.title}</h4>
                           </div>
-                        </div>
-                        
-                        <p className="text-muted-foreground mb-6 flex-grow">
-                          {project.description}
-                        </p>
-                        
-                        <div className="mt-auto">
-                          <div className="flex flex-wrap gap-2 mb-4">
-                            {project.tech.map(tech => (
-                              <span 
-                                key={tech} 
-                                className="inline-block text-xs font-medium bg-secondary px-2 py-1"
-                              >
-                                {tech}
-                              </span>
-                            ))}
+                          
+                          <p className="text-muted-foreground mb-6 flex-grow">
+                            {project.description}
+                          </p>
+                          
+                          <div className="mt-auto">
+                            <div className="flex flex-wrap gap-2 mb-4">
+                              {project.tech.map(tech => (
+                                <span 
+                                  key={tech} 
+                                  className="inline-block text-xs font-medium bg-secondary/70 backdrop-blur-sm px-3 py-1 rounded-full"
+                                >
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -138,15 +150,17 @@ const Projects = () => {
           </div>
           
           <div className="mt-16 flex justify-center">
-            <a 
+            <motion.a 
               href="https://github.com/mayank-96" 
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-mono uppercase tracking-wider hover:translate-y-[-2px] transition-transform"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-primary/80 text-white font-mono uppercase tracking-wider hover:translate-y-[-2px] transition-transform rounded-lg"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
             >
               <Github size={18} />
               View More on GitHub
-            </a>
+            </motion.a>
           </div>
         </div>
       </div>
