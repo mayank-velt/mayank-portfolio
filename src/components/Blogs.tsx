@@ -1,5 +1,4 @@
 
-import { motion } from "framer-motion";
 import { ExternalLink, BookOpen } from "lucide-react";
 
 const blogs = [
@@ -19,51 +18,49 @@ const blogs = [
 
 const Blogs = () => {
   return (
-    <section id="blogs" className="py-24 relative">
-      <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-secondary/50 to-transparent"></div>
-      
-      {/* Gradient bg elements */}
-      <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div 
-          className="max-w-3xl mx-auto text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            <span className="text-primary">Tech</span> Blogs
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            I share my knowledge and experiences through technical articles.
-          </p>
-        </motion.div>
-        
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          {blogs.map((blog, index) => (
-            <motion.div
-              key={blog.title}
-              className="bg-card rounded-lg border border-border p-6 shadow-sm hover:shadow-md transition-all group"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                  <BookOpen size={24} className="text-primary" />
-                </div>
+    <section id="blogs" className="py-24 bg-secondary/30 relative">
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-16">
+            <p className="font-mono text-sm uppercase tracking-wider text-primary mb-4">
+              Knowledge Sharing
+            </p>
+            <h2 className="text-6xl md:text-7xl font-anton uppercase tracking-tight mb-8">
+              Blogs
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl">
+              I share my technical knowledge and experiences through articles to help others in the developer community.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {blogs.map((blog, index) => (
+              <div 
+                key={blog.title}
+                className={`lg:col-span-6 group relative ${index === 0 ? "lg:col-start-1" : "lg:col-start-7"}`}
+              >
+                {/* Background decoration */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent -z-10 transform group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-300"></div>
                 
-                <div>
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                    {blog.title}
-                  </h3>
-                  <p className="text-sm text-primary mb-3">
-                    {blog.publisher}
-                  </p>
-                  <p className="text-muted-foreground mb-4">
+                <div className="bg-background border border-border hover:border-primary/50 transition-colors p-8">
+                  <div className="mb-6 flex items-start gap-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-sm flex items-center justify-center shrink-0">
+                      <BookOpen size={24} className="text-primary" />
+                    </div>
+                    
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
+                        {blog.title}
+                      </h3>
+                      <p className="text-sm text-primary font-mono mb-0">
+                        {blog.publisher}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="h-[1px] w-full bg-border mb-6"></div>
+                  
+                  <p className="text-muted-foreground mb-6">
                     {blog.description}
                   </p>
                   
@@ -71,15 +68,15 @@ const Blogs = () => {
                     href={blog.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-sm font-medium text-primary hover:underline"
+                    className="inline-flex items-center font-mono text-sm uppercase tracking-wide text-primary hover:underline"
                   >
                     Read Article
-                    <ExternalLink size={14} className="ml-1" />
+                    <ExternalLink size={14} className="ml-2" />
                   </a>
                 </div>
               </div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

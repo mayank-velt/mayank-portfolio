@@ -1,155 +1,98 @@
 
-import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, Github, Linkedin, Twitter } from "lucide-react";
+import { Code } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section className="min-h-screen pt-24 pb-16 relative overflow-hidden flex items-center">
-      {/* Gradient background elements */}
-      <div className="absolute -top-20 -right-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
-      <div className="absolute top-1/3 -left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl" />
-      
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 grid-pattern opacity-50" />
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
-          <div className="lg:col-span-3 space-y-8">
-            <motion.div 
-              className="space-y-3"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full font-medium text-sm">
-                Software Engineer
+    <section id="hero" className="pt-32 pb-16 md:py-32 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7 space-y-6">
+            <p className="font-mono text-sm uppercase tracking-wider text-primary animate-fade-in">
+              Hi there, I'm Mayank
+            </p>
+            
+            <div className="relative">
+              <div className="absolute -top-10 -left-4 text-[180px] font-anton text-primary/10 animate-fade-in delay-300">
+                &lt;/&gt;
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                Hi, I'm <span className="text-primary">Mayank Pagar</span>
-                <span className="inline-block">👋</span>
+              
+              <h1 className="text-6xl md:text-8xl font-anton uppercase tracking-tight leading-none relative z-10">
+                <span className="block animate-slide-left">Front</span>
+                <span className="block animate-slide-right">End</span>
+                <span className="block text-primary animate-slide-left delay-200">Developer</span>
               </h1>
-              <h2 className="text-xl md:text-2xl text-muted-foreground">
-                I build things for the web & mobile
-              </h2>
-            </motion.div>
+            </div>
             
-            <motion.div
-              className="flex flex-wrap gap-4 text-muted-foreground"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <div className="flex items-center gap-2">
-                <Phone size={16} className="text-primary" />
-                <span>7620415699</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin size={16} className="text-primary" />
-                <span>Pune, India</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail size={16} className="text-primary" />
-                <a href="mailto:pagarmayank07@gmail.com" className="hover:text-primary transition-colors">
-                  pagarmayank07@gmail.com
-                </a>
-              </div>
-            </motion.div>
+            <p className="text-lg text-muted-foreground max-w-2xl mt-8 animate-fade-in delay-400">
+              I'm a dedicated software engineer with experience in building applications for web and mobile platforms. 
+              My passion for software lies with dreaming up ideas and making them come true with elegant pixel-perfect interfaces.
+            </p>
             
-            <motion.div
-              className="flex gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
+            <div className="flex flex-wrap gap-4 mt-10 animate-fade-in delay-500">
               <a 
-                href="https://linkedin.com/in/mayank-pagar" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
-                aria-label="LinkedIn Profile"
+                href="#contact" 
+                className="px-8 py-3 bg-primary text-white font-medium uppercase tracking-wide inline-flex items-center transition-transform hover:translate-y-[-2px]"
               >
-                <Linkedin size={18} />
+                Contact Me
               </a>
               <a 
-                href="https://github.com/mayank-96" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
-                aria-label="GitHub Profile"
+                href="#projects" 
+                className="px-8 py-3 border border-foreground bg-transparent text-foreground font-medium uppercase tracking-wide transition-transform hover:translate-y-[-2px]"
               >
-                <Github size={18} />
+                View Work
               </a>
-              <a 
-                href="https://twitter.com/mayankp09_" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
-                aria-label="Twitter Profile"
-              >
-                <Twitter size={18} />
-              </a>
-            </motion.div>
-            
-            <motion.p 
-              className="text-lg text-muted-foreground max-w-2xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              My passion for software lies with dreaming up ideas and making them come true with elegant pixel-perfect interfaces. I take great care in the experience, architecture, and code quality of the things I build.
-            </motion.p>
-            
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-4 pt-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <a href="#contact" className="inline-flex items-center justify-center h-12 px-6 bg-primary text-white font-medium rounded-lg transition-all hover:bg-primary/90">
-                Get in touch
-              </a>
-              <a href="#experience" className="inline-flex items-center justify-center h-12 px-6 border border-border bg-background font-medium rounded-lg transition-all hover:bg-muted">
-                View my work
-              </a>
-            </motion.div>
+            </div>
           </div>
           
-          <div className="lg:col-span-2 relative">
-            <motion.div 
-              className="relative z-10 code-section"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
-              <div className="line-numbers">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(num => (
-                  <div key={num}>{num}</div>
-                ))}
+          <div className="lg:col-span-5 relative animate-fade-in delay-300">
+            <div className="bg-secondary/50 p-6 lg:p-8 rounded-sm relative z-10">
+              <div className="flex items-start gap-3 mb-4">
+                <div className="p-2 bg-primary/10 rounded-sm">
+                  <Code className="text-primary" size={24} />
+                </div>
+                <p className="text-sm font-mono opacity-70 pt-1.5">developer.profile</p>
               </div>
-              <div className="code-content">
-                <pre>
-                  <code>
-                    <span className="text-blue-400">const</span> <span className="text-green-400">developer</span> = {"{"}
-                    {"\n"}  <span className="text-yellow-400">name</span>: <span className="text-orange-300">'Mayank Pagar'</span>,
-                    {"\n"}  <span className="text-yellow-400">title</span>: <span className="text-orange-300">'Software Engineer'</span>,
-                    {"\n"}  <span className="text-yellow-400">location</span>: <span className="text-orange-300">'Pune, India'</span>,
-                    {"\n"}  <span className="text-yellow-400">skills</span>: [
-                    {"\n"}    <span className="text-orange-300">'React'</span>, 
-                    {"\n"}    <span className="text-orange-300">'React Native'</span>, 
-                    {"\n"}    <span className="text-orange-300">'TypeScript'</span>,
-                    {"\n"}    <span className="text-orange-300">'UI/UX'</span>
-                    {"\n"}  ],
-                    {"\n"}  <span className="text-yellow-400">passion</span>: <span className="text-orange-300">'Building elegant interfaces'</span>
-                    {"\n"}{"}"}
-                    <span className="cursor-blink">|</span>
-                  </code>
-                </pre>
+              
+              <div className="font-mono text-sm">
+                <div className="mb-3">
+                  <span className="text-primary">const</span> <span className="text-blue-600">developer</span> = {"{"}
+                </div>
+                
+                <div className="pl-6 space-y-1">
+                  <div>
+                    <span className="text-orange-600">name</span>: <span className="text-green-600">'Mayank Pagar'</span>,
+                  </div>
+                  <div>
+                    <span className="text-orange-600">title</span>: <span className="text-green-600">'Software Engineer'</span>,
+                  </div>
+                  <div>
+                    <span className="text-orange-600">location</span>: <span className="text-green-600">'Pune, India'</span>,
+                  </div>
+                  <div>
+                    <span className="text-orange-600">skills</span>: [
+                  </div>
+                  <div className="pl-6">
+                    <span className="text-green-600">'React'</span>,
+                    <span className="text-green-600">'React Native'</span>,
+                    <span className="text-green-600">'TypeScript'</span>,
+                  </div>
+                  <div className="pl-6">
+                    <span className="text-green-600">'UI/UX'</span>,
+                    <span className="text-green-600">'Problem Solving'</span>
+                  </div>
+                  <div>
+                    ],
+                  </div>
+                  <div>
+                    <span className="text-orange-600">passion</span>: <span className="text-green-600">'Building elegant interfaces'</span>
+                  </div>
+                </div>
+                
+                <div className="mt-3">{"}"}</div>
               </div>
-            </motion.div>
+            </div>
             
-            {/* Decorative elements */}
-            <div className="absolute -bottom-5 -right-5 w-24 h-24 bg-primary/20 rounded-full blur-xl" />
-            <div className="absolute -top-5 -left-5 w-16 h-16 bg-blue-500/20 rounded-full blur-xl" />
+            <div className="absolute -bottom-4 -right-4 w-full h-full bg-primary/10 rounded-sm -z-10"></div>
           </div>
         </div>
       </div>
