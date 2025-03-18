@@ -86,9 +86,9 @@ const Hobbies = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                "https://photos.app.goo.gl/oDPVmddVPGpArH7d6",
-                "https://photos.app.goo.gl/StuCjXcAGGPhvJLe7",
-                "https://photos.app.goo.gl/bTWvhCPUaiJeNaPA8"
+                "https://i.imgur.com/1lrgDuh.jpg",
+                "https://i.imgur.com/QofQoSg.jpg",
+                "https://i.imgur.com/c47D1kW.jpg"
               ].map((item, index) => (
                 <motion.div
                   key={index}
