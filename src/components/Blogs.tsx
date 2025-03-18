@@ -8,14 +8,14 @@ const blogs = [
     url: "https://nativebase.hashnode.dev/nativebase-x-formik",
     publisher: "NativeBase Hashnode",
     description: "A comprehensive guide on integrating NativeBase with Formik for form management in React Native applications.",
-    banner: "https://cdn.hashnode.com/res/hashnode/image/upload/v1658214752263/ByLFYVE0c.png"
+    banner: "https://images.unsplash.com/photo-1603468620905-8de7d86b781e?q=80&w=2676&auto=format&fit=crop"
   },
   {
     title: "How Automated Web Scraping can Ease Your Pain",
     url: "https://medium.com/python-in-plain-english/how-automated-web-scraping-can-ease-your-pain-8839f436bb13",
     publisher: "Medium - Python in Plain English",
     description: "An in-depth tutorial on implementing automated web scraping solutions using Python.",
-    banner: "https://miro.medium.com/max/1400/1*ubYV23kkMRr-xXH73x7Qgg.jpeg"
+    banner: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2670&auto=format&fit=crop"
   }
 ];
 
@@ -65,7 +65,7 @@ const Blogs = () => {
               >
                 <div className="relative p-px overflow-hidden rounded-lg bg-gradient-to-br from-primary/30 via-primary/20 to-transparent h-full">
                   <div className="bg-background backdrop-blur-sm rounded-lg h-full flex flex-col">
-                    <div className="w-full h-48 overflow-hidden relative">
+                    <div className="w-full h-56 overflow-hidden relative">
                       <img 
                         src={blog.banner} 
                         alt={blog.title} 
@@ -92,7 +92,7 @@ const Blogs = () => {
                       
                       <div className="h-[1px] w-full bg-gradient-to-r from-primary/20 via-primary/10 to-transparent mb-6"></div>
                       
-                      <p className="text-muted-foreground mb-6 flex-grow">
+                      <p className="text-muted-foreground mb-6 flex-grow line-clamp-3">
                         {blog.description}
                       </p>
                       

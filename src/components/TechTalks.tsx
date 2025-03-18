@@ -6,14 +6,14 @@ const talks = [
   {
     title: "Headless CMS as a Low Code Tool",
     event: "Low-code/No-code Hybrid Meetup | GeekyAnts",
-    url: "https://www.youtube.com/watch?v=7-UUZBn8e7c&list=PLgCGQtEZyQbNDO9l7wtzeyZZ9C0Dxa4Mf&index=6",
-    thumbnail: "/lovable-uploads/d699d4cb-8097-47b1-9486-500b5f003814.png"
+    url: "https://www.youtube.com/watch?v=7-UUZBn8e7c",
+    videoId: "7-UUZBn8e7c"
   },
   {
     title: "Panel Discussion Ft. Sanket Sahu and the Speakers",
     event: "Low-code/No-code Hybrid Meetup | GeekyAnts",
-    url: "https://www.youtube.com/watch?v=cFcjH4WbRS0&list=PLgCGQtEZyQbNDO9l7wtzeyZZ9C0Dxa4Mf&index=6",
-    thumbnail: "/lovable-uploads/d699d4cb-8097-47b1-9486-500b5f003814.png"
+    url: "https://www.youtube.com/watch?v=cFcjH4WbRS0",
+    videoId: "cFcjH4WbRS0"
   }
 ];
 
@@ -52,12 +52,18 @@ const TechTalks = () => {
                 <div className="bg-background backdrop-blur-sm rounded-lg overflow-hidden h-full flex flex-col">
                   <div className="relative aspect-video bg-black/20 overflow-hidden">
                     <img 
-                      src={talk.thumbnail} 
+                      src={`https://img.youtube.com/vi/${talk.videoId}/maxresdefault.jpg`} 
                       alt={talk.title}
                       className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = `https://img.youtube.com/vi/${talk.videoId}/hqdefault.jpg`;
+                      }}
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <Video size={48} className="text-white/80" />
+                      <div className="w-16 h-16 rounded-full bg-primary/80 flex items-center justify-center shadow-lg">
+                        <Video className="text-white" size={28} />
+                      </div>
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/20 group-hover:opacity-70 transition-opacity"></div>
                   </div>

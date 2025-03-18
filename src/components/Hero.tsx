@@ -75,13 +75,13 @@ const Hero = () => {
             <div className="flex flex-wrap gap-4 mt-10 animate-fade-in delay-500">
               <a 
                 href="#contact" 
-                className="px-8 py-3 bg-primary text-white font-medium uppercase tracking-wide inline-flex items-center transition-transform hover:translate-y-[-2px] rounded-md"
+                className="px-8 py-3 bg-primary text-white font-medium uppercase tracking-wide inline-flex items-center transition-transform hover:translate-y-[-2px] rounded-md shadow-lg hover:shadow-xl"
               >
                 Contact Me
               </a>
               <a 
                 href="#projects" 
-                className="px-8 py-3 border border-foreground bg-transparent text-foreground font-medium uppercase tracking-wide transition-transform hover:translate-y-[-2px] rounded-md"
+                className="px-8 py-3 border border-foreground/80 bg-transparent text-foreground font-medium uppercase tracking-wide transition-all hover:bg-foreground/5 hover:translate-y-[-2px] rounded-md"
               >
                 View Work
               </a>
@@ -89,7 +89,7 @@ const Hero = () => {
           </div>
           
           <div className="lg:col-span-5 relative animate-fade-in delay-300">
-            <div className="bg-background/70 backdrop-blur-sm p-6 lg:p-8 rounded-lg shadow-lg relative z-10 border border-primary/10">
+            <div className="bg-background/70 backdrop-blur-sm p-6 lg:p-8 rounded-lg shadow-lg relative z-10 border border-primary/10 hover:border-primary/20 transition-colors">
               <div className="flex items-start gap-3 mb-4">
                 <div className="p-2 bg-primary/10 rounded-full">
                   <Code className="text-primary" size={24} />
@@ -116,12 +116,12 @@ const Hero = () => {
                     <span className="text-orange-600">skills</span>: [
                   </div>
                   <div className="pl-6">
-                    <span className="text-green-600">'React'</span>,
-                    <span className="text-green-600">'React Native'</span>,
+                    <span className="text-green-600">'React'</span>,{" "}
+                    <span className="text-green-600">'React Native'</span>,{" "}
                     <span className="text-green-600">'TypeScript'</span>,
                   </div>
                   <div className="pl-6">
-                    <span className="text-green-600">'UI/UX'</span>,
+                    <span className="text-green-600">'UI/UX'</span>,{" "}
                     <span className="text-green-600">'Problem Solving'</span>
                   </div>
                   <div>
