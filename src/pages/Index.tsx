@@ -13,8 +13,12 @@ import Skills from "@/components/Skills";
 import Blogs from "@/components/Blogs";
 import TechTalks from "@/components/TechTalks";
 import Hobbies from "@/components/Hobbies";
+import CustomCursor from "@/components/CustomCursor";
+import { useThemeStore } from "@/stores/useThemeStore";
 
 const Index = () => {
+  const { isDarkMode } = useThemeStore();
+  
   useEffect(() => {
     // Update document title
     document.title = "Ctrl+Alt+Mayank | Your development keyboard shortcut";
@@ -38,7 +42,8 @@ const Index = () => {
   }, []);
   
   return (
-    <div className="bg-background relative">
+    <div className={`bg-background relative ${isDarkMode ? 'dark' : ''}`}>
+      <CustomCursor />
       <Header />
       <main>
         <Hero />
