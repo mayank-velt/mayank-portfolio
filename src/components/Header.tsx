@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Github, Linkedin, Twitter, Mail, Menu, X, FileText } from "lucide-react";
+import { Github, Linkedin, Twitter, Mail, Menu, X, FileText, Command, Terminal } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Header = () => {
@@ -40,11 +40,15 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center">
-          <a href="#" className="text-xl font-mono font-bold hover:text-primary transition-colors flex items-center">
-            <span className="text-primary">Ctrl</span>
-            <span className="text-foreground">Alt</span>
-            <span className="text-primary">Mayank</span>
-            <span className="text-xs align-top text-foreground/70">.com</span>
+          <a href="#" className="text-xl font-mono font-bold hover:text-primary transition-colors flex items-center gap-1.5">
+            <div className="flex items-center justify-center p-1.5 bg-primary/10 rounded text-primary">
+              <Terminal size={18} className="text-primary" />
+            </div>
+            <div className="flex items-baseline">
+              <span className="text-primary">Ctrl</span>
+              <span className="text-foreground">+Alt+</span>
+              <span className="text-primary">Mayank</span>
+            </div>
           </a>
 
           {/* Desktop Navigation */}
@@ -111,11 +115,15 @@ const Header = () => {
           className="fixed inset-0 bg-background z-40 md:hidden flex flex-col"
         >
           <div className="container mx-auto px-4 py-5 flex justify-between items-center">
-            <a href="#" className="text-xl font-mono font-bold">
-              <span className="text-primary">Ctrl</span>
-              <span className="text-foreground">Alt</span>
-              <span className="text-primary">Mayank</span>
-              <span className="text-xs align-top text-foreground/70">.com</span>
+            <a href="#" className="text-xl font-mono font-bold flex items-center gap-1.5">
+              <div className="flex items-center justify-center p-1.5 bg-primary/10 rounded text-primary">
+                <Terminal size={18} />
+              </div>
+              <div className="flex items-baseline">
+                <span className="text-primary">Ctrl</span>
+                <span className="text-foreground">+Alt+</span>
+                <span className="text-primary">Mayank</span>
+              </div>
             </a>
             <button onClick={toggleMenu} className="text-foreground p-1">
               <X size={24} />
@@ -168,7 +176,7 @@ const Header = () => {
                 ))}
               </div>
               <p className="text-center text-sm text-muted-foreground">
-                &copy; {new Date().getFullYear()} CtrlAltMayank.com | All rights reserved
+                &copy; {new Date().getFullYear()} Ctrl+Alt+Mayank | All rights reserved
               </p>
             </div>
           </div>

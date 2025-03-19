@@ -1,5 +1,5 @@
 
-import { Heart } from "lucide-react";
+import { Heart, Terminal } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -7,11 +7,15 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-1">
-            <div className="text-2xl font-mono font-bold text-foreground mb-4">
-              <span className="text-primary">Ctrl</span>
-              <span className="text-foreground">Alt</span>
-              <span className="text-primary">Mayank</span>
-              <span className="text-xs align-top text-foreground/70">.com</span>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center justify-center p-2 bg-primary/10 rounded text-primary">
+                <Terminal size={20} className="text-primary" />
+              </div>
+              <div className="text-2xl font-mono font-bold text-foreground">
+                <span className="text-primary">Ctrl</span>
+                <span className="text-foreground">+Alt+</span>
+                <span className="text-primary">Mayank</span>
+              </div>
             </div>
             <p className="text-muted-foreground mb-2 max-w-md">
               Software engineer specializing in building exceptional digital experiences with a focus on responsive design and clean code.
@@ -99,7 +103,7 @@ const Footer = () => {
         
         <div className="mt-12 pt-8 border-t border-border text-center text-muted-foreground">
           <p className="flex items-center justify-center gap-1">
-            © {new Date().getFullYear()} CtrlAltMayank.com. Made with 
+            © {new Date().getFullYear()} Ctrl+Alt+Mayank. Made with 
             <Heart size={16} className="text-primary" /> in Pune, India
           </p>
         </div>
