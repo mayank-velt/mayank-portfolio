@@ -1,3 +1,4 @@
+
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -28,9 +29,13 @@ export const generateRandomColor = (): string => {
   const hue = Math.floor(Math.random() * 360);
   // Keep saturation high (65-85%) for vibrant colors
   const saturation = Math.floor(Math.random() * 20 + 65);
-  // Adjust lightness based on dark/light mode
-  // For now, keep it in a good middle range that works for both
-  const lightness = Math.floor(Math.random() * 15 + 25);
+  
+  // Adjust lightness based on if it's dark mode or not
+  // For dark mode, we need higher lightness to be visible
+  const isDarkMode = document.documentElement.classList.contains('dark');
+  const lightness = isDarkMode ? 
+    Math.floor(Math.random() * 15 + 35) : // 35-50% for dark mode (brighter)
+    Math.floor(Math.random() * 15 + 20);  // 20-35% for light mode (darker)
   
   return `${hue} ${saturation}% ${lightness}%`;
 };

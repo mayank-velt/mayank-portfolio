@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { PaintBucket } from 'lucide-react';
 import { useThemeStore, generateRandomColor } from '@/stores/useThemeStore';
@@ -10,9 +11,15 @@ const ThemeColorButton = () => {
     // Update the CSS variable
     document.documentElement.style.setProperty('--primary', primaryColor);
     
-    // Also update derived colors (like primary-foreground) if needed
-    // This keeps the text readable against the new background color
-    // No changes needed as our CSS variables already handle this well
+    // Since dark mode changes the UI, we need to regenerate colors when toggling modes
+    const updateColors = () => {
+      if (document.documentElement.classList.contains('dark')) {
+        // In dark mode, we might need to adjust some dependent CSS variables
+        // No changes needed as our variables are well set up in index.css
+      }
+    };
+    
+    updateColors();
   }, [primaryColor, isDarkMode]);
   
   const handleChangeColor = () => {
