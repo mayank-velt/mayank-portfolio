@@ -1,8 +1,37 @@
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Calendar } from "lucide-react";
+import { Briefcase, Calendar, Clock } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+// Function to calculate experience duration
+const calculateDuration = (startDate: string, endDate: string = "Present") => {
+  const parseDate = (dateStr: string) => {
+    if (dateStr === "Present") {
+      return new Date();
+    }
+    
+    const [month, year] = dateStr.split("/");
+    return new Date(parseInt(year), parseInt(month) - 1);
+  };
+
+  const start = parseDate(startDate);
+  const end = parseDate(endDate);
+  
+  // Calculate difference in months
+  const diffMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+  
+  const years = Math.floor(diffMonths / 12);
+  const months = diffMonths % 12;
+  
+  if (years === 0) {
+    return `${months} month${months !== 1 ? 's' : ''}`;
+  } else if (months === 0) {
+    return `${years} year${years !== 1 ? 's' : ''}`;
+  } else {
+    return `${years} year${years !== 1 ? 's' : ''}, ${months} month${months !== 1 ? 's' : ''}`;
+  }
+};
 
 const experiences = [
   {
@@ -10,6 +39,8 @@ const experiences = [
     company: "Velt [YC W22]",
     title: "Founding UI Engineer",
     period: "12/2023 – Present",
+    startDate: "12/2023",
+    endDate: "Present",
     location: "Remote (India)",
     responsibilities: [
       "Solely developed and launched a collaborative File Drive (Lottie, PDF, image, video) with custom media players, driving a 10% revenue increase.",
@@ -25,6 +56,8 @@ const experiences = [
     company: "GeekyAnts",
     title: "Software Engineer - III",
     period: "07/2023 – 12/2023",
+    startDate: "07/2023",
+    endDate: "12/2023",
     location: "Bangalore, India",
     responsibilities: [
       "Developed an internal Figma plugin that auto-generates a design system from Storybook, supporting complex features like auto layout, reducing designer effort by 99%. The resulting auto-generated Figma file achieved 114 likes and 6.2k users.",
@@ -36,6 +69,8 @@ const experiences = [
     company: "GeekyAnts",
     title: "Software Engineer - I",
     period: "07/2022 – 07/2023",
+    startDate: "07/2022",
+    endDate: "07/2023",
     location: "Bangalore, India",
     responsibilities: [
       "Co-created a performant Universal component library GlueStack for React and React Native environments, achieving 3.5k GitHub stars and 14k monthly npm users.",
@@ -48,6 +83,8 @@ const experiences = [
     company: "GeekyAnts",
     title: "Software Engineer Intern",
     period: "11/2021 – 07/2022",
+    startDate: "11/2021",
+    endDate: "07/2022",
     location: "Banglore, India",
     responsibilities: [
       "Worked on NativeBase core, a widely adopted UI library with over 65 K+ weekly downloads and 18K+ Github stars.",
@@ -59,6 +96,8 @@ const experiences = [
     company: "EduCompanion",
     title: "Backend Developer Intern",
     period: "07/2021 – 11/2021",
+    startDate: "07/2021",
+    endDate: "11/2021",
     location: "(Remote) Murcia, Spain",
     responsibilities: [
       "Developed a website for the MOOC platform using MERN stack.",
@@ -70,6 +109,8 @@ const experiences = [
     company: "Destro.ai",
     title: "Data Science Intern",
     period: "04/2021 – 05/2021",
+    startDate: "04/2021",
+    endDate: "05/2021",
     location: "(Remote) Mumbai, India",
     responsibilities: [
       "Automated data collection by scheduling scripts.",
@@ -81,6 +122,8 @@ const experiences = [
     company: "AmazeBasket",
     title: "AI/ML Intern",
     period: "03/2021 – 05/2021",
+    startDate: "03/2021",
+    endDate: "05/2021",
     location: "(Remote) Mumbai, India",
     responsibilities: [
       "Developed retrieval-based Chatbot API using Bi-LSTM model to classify which category the user's message belongs to and then give a random response from the list of responses.",
@@ -92,6 +135,38 @@ const experiences = [
 
 const Experience = () => {
   const [activeTab, setActiveTab] = useState(experiences[0].id);
+
+  // Calculate total experience
+  const totalExperience = useMemo(() => {
+    // Find earliest start date
+    const earliestStart = experiences.reduce((earliest, exp) => {
+      const currentStartDate = exp.startDate.split('/');
+      const currentStartMonth = parseInt(currentStartDate[0]);
+      const currentStartYear = parseInt(currentStartDate[1]);
+      
+      if (!earliest) return { month: currentStartMonth, year: currentStartYear };
+      
+      if (currentStartYear < earliest.year || 
+          (currentStartYear === earliest.year && currentStartMonth < earliest.month)) {
+        return { month: currentStartMonth, year: currentStartYear };
+      }
+      
+      return earliest;
+    }, null);
+    
+    if (!earliestStart) return "N/A";
+    
+    const startDateString = `${earliestStart.month}/${earliestStart.year}`;
+    return calculateDuration(startDateString);
+  }, []);
+
+  // Calculate individual experience durations
+  const experiencesWithDuration = useMemo(() => {
+    return experiences.map(exp => ({
+      ...exp,
+      duration: calculateDuration(exp.startDate, exp.endDate)
+    }));
+  }, []);
 
   return (
     <section id="experience" className="py-24 bg-secondary/50 relative">
@@ -111,6 +186,11 @@ const Experience = () => {
           <p className="text-lg text-muted-foreground">
             My journey as a software engineer, working with innovative teams and technologies.
           </p>
+          
+          <div className="mt-6 inline-flex items-center justify-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium">
+            <Clock size={18} className="mr-2" />
+            <span>Total Experience: {totalExperience}</span>
+          </div>
         </motion.div>
         
         <div className="max-w-4xl mx-auto">
@@ -122,7 +202,7 @@ const Experience = () => {
           >
             <div className="mb-8 overflow-x-auto pb-3">
               <TabsList className="bg-transparent space-x-2 sm:space-x-4 w-max">
-                {experiences.map((exp) => (
+                {experiencesWithDuration.map((exp) => (
                   <TabsTrigger 
                     key={exp.id} 
                     value={exp.id}
@@ -134,7 +214,7 @@ const Experience = () => {
               </TabsList>
             </div>
             
-            {experiences.map((exp) => (
+            {experiencesWithDuration.map((exp) => (
               <TabsContent key={exp.id} value={exp.id} className="mt-0">
                 <motion.div 
                   className="bg-card rounded-lg p-6 border border-border shadow-sm"
@@ -152,6 +232,10 @@ const Experience = () => {
                       <div className="flex items-center text-muted-foreground">
                         <Calendar size={18} className="mr-2" />
                         <span>{exp.period}</span>
+                      </div>
+                      <div className="flex items-center text-muted-foreground">
+                        <Clock size={18} className="mr-2" />
+                        <span>{exp.duration}</span>
                       </div>
                       <div className="flex items-center text-muted-foreground">
                         <Briefcase size={18} className="mr-2" />
