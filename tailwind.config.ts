@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -58,11 +59,28 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Custom neon colors
+				neon: {
+					purple: '#8B5CF6',
+					blue: '#0EA5E9',
+					pink: '#D946EF',
+					orange: '#F97316',
+					green: '#10B981'
+				},
+			},
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'grid-pattern': "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIj48cGF0aCBkPSJNNjAgMEgwdjYwaDYweiIvPjwvZz48L2c+PC9zdmc+')",
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
+			},
+			boxShadow: {
+				'neon-purple': '0 0 10px rgba(139, 92, 246, 0.7)',
+				'neon-blue': '0 0 10px rgba(14, 165, 233, 0.7)',
+				'neon-pink': '0 0 10px rgba(217, 70, 239, 0.7)',
 			},
 			keyframes: {
 				'accordion-down': {
@@ -105,6 +123,14 @@ export default {
 				'marquee': {
 					'0%': { transform: 'translateX(0%)' },
 					'100%': { transform: 'translateX(-100%)' }
+				},
+				'glow': {
+					'0%, 100%': { 
+						filter: 'drop-shadow(0 0 5px rgba(139, 92, 246, 0.7))' 
+					},
+					'50%': { 
+						filter: 'drop-shadow(0 0 20px rgba(14, 165, 233, 0.9))' 
+					}
 				}
 			},
 			animation: {
@@ -113,7 +139,8 @@ export default {
 				'float': 'float 6s ease-in-out infinite',
 				'typing': 'typing 3.5s steps(40, end), blink .75s step-end infinite',
 				'gradient-x': 'gradient-x 15s ease infinite',
-				'marquee': 'marquee 25s linear infinite'
+				'marquee': 'marquee 25s linear infinite',
+				'glow': 'glow 3s ease-in-out infinite'
 			}
 		}
 	},
