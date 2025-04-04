@@ -48,20 +48,22 @@ const Index = () => {
   }, [isDarkMode]);
   
   return (
-    <div className={`bg-background relative ${isDarkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen bg-background relative ${isDarkMode ? 'dark' : ''}`}>
       <Header />
-      <main>
+      <main className="overflow-hidden">
         <Hero />
-        <Projects />
-        <About />
-        <Experience />
-        <Skills />
-        <Achievements />
-        <OpenSource />
-        <Blogs />
-        <TechTalks />
-        <Hobbies />
-        <Contact />
+        <div className="container mx-auto px-4 md:px-8">
+          <Projects />
+          <About />
+          <Experience />
+          <Skills />
+          <Achievements />
+          <OpenSource />
+          <Blogs />
+          <TechTalks />
+          <Hobbies />
+          <Contact />
+        </div>
       </main>
       <Footer />
       

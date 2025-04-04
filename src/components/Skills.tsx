@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Code, Database, Layout, Server, Terminal, Workflow } from "lucide-react";
+import { Code, Database, Layout, Server, Terminal } from "lucide-react";
 
 const Skills = () => {
   const skillCategories = [
@@ -39,7 +39,7 @@ const Skills = () => {
       <div className="absolute bottom-1/4 -left-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute top-1/3 -right-20 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="relative z-10">
         <motion.div 
           className="max-w-3xl mx-auto text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -64,8 +64,8 @@ const Skills = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
             >
-              <div className="relative p-px overflow-hidden rounded-lg bg-gradient-to-br from-primary/30 via-primary/20 to-transparent h-full">
-                <div className="bg-background backdrop-blur-sm p-6 rounded-lg h-full">
+              <div className="relative p-px overflow-hidden rounded-xl bg-gradient-to-br from-primary/30 via-primary/20 to-transparent h-full">
+                <div className="bg-background/60 backdrop-blur-sm p-6 rounded-xl h-full">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
                       <category.icon className="text-primary" size={20} />

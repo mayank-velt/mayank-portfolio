@@ -29,7 +29,11 @@ const Hero = () => {
   }, [mousePosition]);
 
   return (
-    <section id="hero" className="relative pt-32 pb-16 md:py-32 overflow-hidden">
+    <section id="hero" className="relative overflow-hidden pt-32 pb-16 md:py-32" style={{
+      height: "100vh",
+      display: "flex",
+      alignItems: "center"
+    }}>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div 
           ref={northernLightsRef}
