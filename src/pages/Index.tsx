@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -14,10 +14,12 @@ import Blogs from "@/components/Blogs";
 import TechTalks from "@/components/TechTalks";
 import Hobbies from "@/components/Hobbies";
 import { useThemeStore } from "@/stores/useThemeStore";
+import { ArrowUp } from "lucide-react";
 
 const Index = () => {
   const { isDarkMode } = useThemeStore();
-  
+  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
     // Update document title
     document.title = "Mayank Pagar | Frontend Developer";
@@ -45,7 +47,26 @@ const Index = () => {
         }
       });
     });
+
+    // Show/hide scroll to top button
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
   }, [isDarkMode]);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
   
   return (
     <div className={`min-h-screen bg-background relative ${isDarkMode ? 'dark' : ''}`}>
@@ -68,15 +89,15 @@ const Index = () => {
       <Footer />
       
       {/* Back to top button */}
-      <a 
-        href="#" 
-        className="fixed bottom-8 right-8 p-3 bg-gradient-to-r from-primary to-primary/80 text-white rounded-full shadow-lg hidden md:flex items-center justify-center hover:shadow-xl transition-all z-20"
-        aria-label="Back to top"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-        </svg>
-      </a>
+      {isVisible && (
+        <button 
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 p-3 bg-gradient-to-r from-primary to-primary/80 text-white rounded-full shadow-lg md:flex items-center justify-center hover:shadow-xl transition-all z-20 animate-bounce"
+          aria-label="Back to top"
+        >
+          <ArrowUp className="h-6 w-6" />
+        </button>
+      )}
     </div>
   );
 };
