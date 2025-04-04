@@ -103,17 +103,18 @@ const Hero = () => {
                     <span className="text-orange-600">title</span>: <span className="text-green-600">'Software Engineer'</span>,
                   </div>
                   <div>
-                    <span className="text-orange-600">location</span>: <span className="text-green-600">'Pune, India'</span>,
+                    <span className="text-orange-600">location</span>: <span className="text-green-600">'Nashik, India'</span>,
                   </div>
                   <div>
                     <span className="text-orange-600">skills</span>: [
                   </div>
                   <div className="pl-6">
                     <span className="text-green-600">'React'</span>,{" "}
+                    <span className="text-green-600">'Angular'</span>,{" "}
                     <span className="text-green-600">'React Native'</span>,{" "}
-                    <span className="text-green-600">'TypeScript'</span>,
                   </div>
                   <div className="pl-6">
+                  <span className="text-green-600">'TypeScript'</span>,
                     <span className="text-green-600">'UI/UX'</span>,{" "}
                     <span className="text-green-600">'Problem Solving'</span>
                   </div>

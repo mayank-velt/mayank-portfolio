@@ -9,35 +9,32 @@ const Skills = () => {
       icon: Code,
       skills: ["JavaScript", "TypeScript", "Python", "Java"],
       bgColor: "bg-[#D3E4FD]",
-      iconColor: "text-[#0EA5E9]"
     },
     {
       name: "Frontend",
       icon: Layout,
       skills: ["React.js", "React Native", "Angular", "Lit", "HTML5", "CSS3", "Figma Plugin Development", "Component Library Development", "SDK Development", "Design Systems"],
-      bgColor: "bg-[#F2FCE2]",
-      iconColor: "text-[#8B5CF6]"
+      bgColor: "bg-[#D3E4FD]",
     },
     {
       name: "Backend",
       icon: Server,
       skills: ["Firebase Realtime Database", "Firestore", "Cloud Functions", "Node.js", "RESTful APIs"],
-      bgColor: "bg-[#FEC6A1]",
-      iconColor: "text-[#F97316]"
+      bgColor: "bg-[#D3E4FD]",
+
     },
     {
       name: "Databases",
       icon: Database,
       skills: ["MySQL"],
-      bgColor: "bg-[#E5DEFF]",
-      iconColor: "text-[#D946EF]"
+      bgColor: "bg-[#D3E4FD]",
+
     },
     {
       name: "Others",
       icon: Terminal,
       skills: ["Git", "Linux", "Testing", "Debugging", "Agile", "SDLC", "ARIA", "Internationalization", "Problem-Solving"],
-      bgColor: "bg-[#FFDEE2]",
-      iconColor: "text-[#FF5E6C]"
+      bgColor: "bg-[#D3E4FD]",
     }
   ];
 
@@ -74,11 +71,11 @@ const Skills = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
             >
-              <div className={`relative p-px overflow-hidden rounded-xl bg-gradient-to-br from-primary/30 via-primary/20 to-transparent h-full ${category.bgColor} bg-opacity-20`}>
+              <div className={`relative p-px overflow-hidden rounded-xl bg-gradient-to-br from-primary/30 via-primary/20 to-transparent h-full ${category.bgColor} bg-opacity-10`}>
                 <div className="bg-background/60 backdrop-blur-sm p-6 rounded-xl h-full">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className={`w-10 h-10 ${category.bgColor} bg-opacity-20 rounded-full flex items-center justify-center`}>
-                      <category.icon className={`${category.iconColor}`} size={20} />
+                    <div className={`w-10 h-10 ${category.bgColor} bg-opacity-10 rounded-full flex items-center justify-center`}>
+                      <category.icon size={20} />
                     </div>
                     <h3 className="text-xl font-bold">{category.name}</h3>
                   </div>
@@ -87,7 +84,7 @@ const Skills = () => {
                     {category.skills.map((skill, index) => (
                       <motion.span
                         key={skill}
-                        className={`inline-block px-3 py-1 ${category.bgColor} bg-opacity-50 backdrop-blur-sm rounded-full text-sm font-medium`}
+                        className={`inline-block px-3 py-1 ${category.bgColor} bg-opacity-20 backdrop-blur-sm rounded-full text-sm font-medium`}
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}

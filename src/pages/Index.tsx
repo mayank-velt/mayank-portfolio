@@ -15,6 +15,7 @@ import TechTalks from "@/components/TechTalks";
 import Hobbies from "@/components/Hobbies";
 import { useThemeStore } from "@/stores/useThemeStore";
 import { ArrowUp } from "lucide-react";
+import { Analytics } from '@vercel/analytics/react';  
 
 const Index = () => {
   const { isDarkMode } = useThemeStore();
@@ -70,6 +71,7 @@ const Index = () => {
   
   return (
     <div className={`min-h-screen bg-background relative ${isDarkMode ? 'dark' : ''}`}>
+      <Analytics />
       <Header />
       <main className="overflow-hidden">
         <Hero />
