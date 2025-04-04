@@ -1,8 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { Github, Linkedin, Twitter, Mail, Menu, X, FileText, Terminal, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useThemeStore } from "@/stores/useThemeStore";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -45,73 +45,97 @@ const Header = () => {
     <header 
       className={cn(
         "fixed top-0 left-0 w-full py-5 z-50 transition-all duration-300",
-        isScrolled ? "bg-background/90 backdrop-blur-sm" : "bg-transparent"
+        isScrolled ? "bg-background/80 backdrop-blur-xl border-b border-border/40 shadow-sm" : "bg-transparent"
       )}
     >
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center">
-          <a href="#" className="text-xl font-mono font-bold hover:text-primary transition-colors flex items-center gap-1.5">
-            <div className="flex items-center justify-center p-1.5 bg-primary/10 rounded text-primary">
-              <Terminal size={18} className="text-primary" />
+          <motion.a 
+            href="#" 
+            className="text-xl font-mono font-bold hover:text-primary transition-colors flex items-center gap-2 group"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex items-center justify-center p-2 bg-primary/10 rounded-lg text-primary relative overflow-hidden group-hover:bg-primary/15 transition-colors duration-300">
+              <Terminal size={18} className="text-primary relative z-10" />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <div className="flex items-baseline">
-              <span className="text-foreground">Mayank</span>
+              <span className="text-foreground group-hover:text-primary transition-colors duration-300">Mayank</span>
             </div>
-          </a>
+          </motion.a>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10">
             <ul className="flex gap-8">
               {navLinks.map((link, index) => (
-                <li key={index}>
+                <motion.li 
+                  key={index}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                >
                   <a 
                     href={link.href} 
-                    className="text-sm uppercase tracking-wider hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full"
+                    className="text-sm uppercase tracking-wider hover:text-primary transition-all duration-300 relative px-1"
                   >
-                    {link.name}
+                    <span className="relative z-10">{link.name}</span>
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary/70 transform scale-x-0 origin-left transition-transform duration-300 hover:scale-x-100"></span>
                   </a>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </nav>
 
           <div className="hidden md:flex items-center gap-6">
-            <button 
+            <motion.button 
               onClick={toggleDarkMode}
-              className="flex items-center gap-2 p-2 rounded-md border border-border hover:bg-muted transition-colors"
+              className="flex items-center justify-center w-10 h-10 rounded-full border border-border hover:border-primary/30 hover:bg-primary/5 transition-colors duration-300"
               aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               {isDarkMode ? (
                 <Sun size={18} className="text-yellow-400" />
               ) : (
                 <Moon size={18} className="text-primary" />
               )}
-              <span className="text-xs font-medium">
-                {isDarkMode ? "Light" : "Dark"}
-              </span>
-            </button>
+            </motion.button>
             
-            <a 
+            <motion.a 
               href="https://drive.google.com/file/d/1ysG2hAJbTCnYUpigg4PbjsVD2kMnyqot/view?usp=drive_link" 
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 bg-primary/10 text-primary border border-primary/30 rounded-full flex items-center gap-2 hover:bg-primary/20 transition-colors"
+              className="px-4 py-2 bg-primary/10 text-primary border border-primary/30 rounded-lg flex items-center gap-2 hover:bg-primary/20 transition-all duration-300 group"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              whileHover={{ y: -2 }}
             >
-              <FileText size={16} />
+              <FileText size={16} className="group-hover:animate-pulse" />
               <span className="font-medium">Resume</span>
-            </a>
+            </motion.a>
             
             <div className="flex gap-4">
               {socials.map((social, index) => (
-                <a 
+                <motion.a 
                   key={index}
                   href={social.href}
                   aria-label={social.label}
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-foreground/80 hover:text-primary transition-colors"
+                  className="text-foreground/80 hover:text-primary transition-colors duration-300 relative"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
+                  whileHover={{ y: -2 }}
                 >
                   <social.icon size={18} />
-                </a>
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary/50 transform scale-x-0 origin-center transition-transform duration-300 hover:scale-x-100"></span>
+                </motion.a>
               ))}
             </div>
           </div>
@@ -130,99 +154,122 @@ const Header = () => {
             </button>
             
             <button 
-              className="text-foreground p-1"
+              className="text-foreground p-1.5 bg-background/50 backdrop-blur-sm rounded-md border border-border/50"
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
-              <Menu size={24} />
+              <Menu size={20} />
             </button>
           </div>
         </div>
       </div>
 
-      {isMenuOpen && (
-        <div 
-          className="fixed inset-0 bg-background z-40 md:hidden flex flex-col"
-        >
-          <div className="container mx-auto px-4 py-5 flex justify-between items-center">
-            <a href="#" className="text-xl font-mono font-bold flex items-center gap-1.5">
-              <div className="flex items-center justify-center p-1.5 bg-primary/10 rounded text-primary">
-                <Terminal size={18} />
-              </div>
-              <div className="flex items-baseline">
-                <span className="text-foreground">Mayank</span>
-              </div>
-            </a>
-            <div className="flex items-center gap-4">
-              <button 
-                onClick={toggleDarkMode}
-                className="p-1.5 rounded-md"
-                aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-              >
-                {isDarkMode ? (
-                  <Sun size={18} className="text-yellow-400" />
-                ) : (
-                  <Moon size={18} className="text-primary" />
-                )}
-              </button>
-              
-              <button onClick={toggleMenu} className="text-foreground p-1">
-                <X size={24} />
-              </button>
-            </div>
-          </div>
-          
-          <div className="flex-1 flex flex-col justify-center px-4">
-            <nav className="mb-10">
-              <ul className="space-y-6">
-                {navLinks.map((link, index) => (
-                  <li key={index} className="border-b border-border pb-4">
-                    <a 
-                      href={link.href} 
-                      className="text-2xl font-anton uppercase tracking-wide hover:text-primary transition-colors"
-                      onClick={toggleMenu}
-                    >
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            
-            <div className="space-y-8">
-              <div className="flex justify-center">
-                <a 
-                  href="https://drive.google.com/file/d/1ysG2hAJbTCnYUpigg4PbjsVD2kMnyqot/view?usp=drive_link" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 bg-primary/10 text-primary border border-primary/30 rounded-full flex items-center gap-2 hover:bg-primary/20 transition-colors"
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div 
+            className="fixed inset-0 bg-background/95 backdrop-blur-lg z-40 md:hidden flex flex-col"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="container mx-auto px-4 py-5 flex justify-between items-center">
+              <a href="#" className="text-xl font-mono font-bold flex items-center gap-1.5">
+                <div className="flex items-center justify-center p-1.5 bg-primary/10 rounded-lg text-primary">
+                  <Terminal size={18} />
+                </div>
+                <div className="flex items-baseline">
+                  <span className="text-foreground">Mayank</span>
+                  <span className="text-primary">.dev</span>
+                </div>
+              </a>
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={toggleDarkMode}
+                  className="p-1.5 rounded-md"
+                  aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
                 >
-                  <FileText size={18} />
-                  <span className="font-medium">Resume</span>
-                </a>
+                  {isDarkMode ? (
+                    <Sun size={18} className="text-yellow-400" />
+                  ) : (
+                    <Moon size={18} className="text-primary" />
+                  )}
+                </button>
+                
+                <button 
+                  onClick={toggleMenu} 
+                  className="text-foreground p-1.5 bg-background/50 backdrop-blur-sm rounded-md border border-border/50"
+                >
+                  <X size={20} />
+                </button>
               </div>
-              
-              <div className="flex justify-center gap-6">
-                {socials.map((social, index) => (
-                  <a 
-                    key={index}
-                    href={social.href}
-                    aria-label={social.label}
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-foreground/80 hover:text-primary transition-colors"
-                  >
-                    <social.icon size={24} />
-                  </a>
-                ))}
-              </div>
-              <p className="text-center text-sm text-muted-foreground">
-                &copy; {new Date().getFullYear()} Mayank Pagar | All rights reserved
-              </p>
             </div>
-          </div>
-        </div>
-      )}
+            
+            <div className="flex-1 flex flex-col justify-center px-4">
+              <nav className="mb-10">
+                <ul className="space-y-6">
+                  {navLinks.map((link, index) => (
+                    <motion.li 
+                      key={index} 
+                      className="border-b border-border/50 pb-4"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 * index, duration: 0.3 }}
+                    >
+                      <a 
+                        href={link.href} 
+                        className="text-2xl font-anton uppercase tracking-wide hover:text-primary transition-colors block"
+                        onClick={toggleMenu}
+                      >
+                        {link.name}
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+              </nav>
+              
+              <div className="space-y-8">
+                <motion.div 
+                  className="flex justify-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.3 }}
+                >
+                  <a 
+                    href="https://drive.google.com/file/d/1ysG2hAJbTCnYUpigg4PbjsVD2kMnyqot/view?usp=drive_link" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-primary/10 text-primary border border-primary/30 rounded-lg flex items-center gap-2 hover:bg-primary/20 transition-colors"
+                  >
+                    <FileText size={18} />
+                    <span className="font-medium">Resume</span>
+                  </a>
+                </motion.div>
+                
+                <motion.div 
+                  className="flex justify-center gap-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.3 }}
+                >
+                  {socials.map((social, index) => (
+                    <a 
+                      key={index}
+                      href={social.href}
+                      aria-label={social.label}
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-foreground/80 hover:text-primary transition-colors p-2"
+                    >
+                      <social.icon size={20} />
+                    </a>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
