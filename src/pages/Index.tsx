@@ -13,14 +13,15 @@ import Blogs from "@/components/Blogs";
 import TechTalks from "@/components/TechTalks";
 import Hobbies from "@/components/Hobbies";
 import { useThemeStore } from "@/stores/useThemeStore";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Rocket } from "lucide-react";
 import { Analytics } from '@vercel/analytics/react';  
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { sectionColors } from "@/theme/colors";
 
 const Index = () => {
   const { isDarkMode } = useThemeStore();
   const [isVisible, setIsVisible] = useState(false);
+  const [isRocketAnimating, setIsRocketAnimating] = useState(false);
 
   useEffect(() => {
     // Update document title
@@ -64,10 +65,30 @@ const Index = () => {
   }, [isDarkMode]);
 
   const scrollToTop = () => {
+    setIsRocketAnimating(true);
+    
+    // Reset animation state after animation completes
+    setTimeout(() => {
+      setIsRocketAnimating(false);
+    }, 1000);
+    
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
+  };
+  
+  // Rocket animation variants
+  const rocketVariants = {
+    hidden: { opacity: 0, y: 0 },
+    visible: { 
+      opacity: [0, 1, 1, 0], 
+      y: [-10, -100],
+      transition: { 
+        duration: 1,
+        times: [0, 0.1, 0.8, 1]
+      }
+    }
   };
   
   return (
@@ -116,6 +137,45 @@ const Index = () => {
           </div>
         </motion.button>
       )}
+      
+      {/* Rocket animation */}
+      <AnimatePresence>
+        {isRocketAnimating && (
+          <motion.div 
+            className="fixed z-30 bottom-20 right-11"
+            variants={rocketVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+          >
+            <Rocket 
+              size={28} 
+              className="transform -rotate-45"
+              style={{ color: sectionColors.hero }}
+            />
+            <motion.div 
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-20"
+              style={{ 
+                background: `linear-gradient(to top, ${sectionColors.hero}00, ${sectionColors.hero}80)`,
+                borderRadius: '50%',
+                filter: 'blur(6px)',
+                opacity: 0.7,
+                zIndex: -1
+              }}
+              animate={{
+                height: [0, 20],
+                opacity: [0, 0.7, 0],
+                y: [0, 20]
+              }}
+              transition={{
+                duration: 1,
+                repeat: 1,
+                repeatType: "loop"
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

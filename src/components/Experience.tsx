@@ -207,8 +207,7 @@ const Experience = () => {
         <motion.div 
           className="max-w-7xl mx-auto"
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
           <SectionTitle 
@@ -266,8 +265,8 @@ const Experience = () => {
               className="lg:col-span-2 order-2 lg:order-1"
               variants={containerVariants}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              animate="visible"
+              key="timeline-nav"
             >
               <div className="sticky top-28 space-y-3">
                 {filteredExperiences.map((exp, index) => (
@@ -329,8 +328,8 @@ const Experience = () => {
               className="lg:col-span-4 order-1 lg:order-2"
               variants={containerVariants}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              animate="visible"
+              key={activeTab}
             >
               {filteredExperiences.map((exp) => (
                 activeTab === exp.id && (
