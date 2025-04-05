@@ -1,104 +1,161 @@
-
-import { motion } from "framer-motion";
-import { Code, Database, Layout, Server, Terminal } from "lucide-react";
+import { motion, Variants } from "framer-motion";
+import { Code, Database, Layout, Server, Terminal, Layers, Flame, Sparkles, Box, Globe, Cpu, Zap, Hexagon, Dices } from "lucide-react";
+import { SectionBackground } from "@/components/ui/SectionBackground";
+import { SectionTitle } from "@/components/ui/SectionTitle";
+import { sectionColors } from "@/theme/colors";
+import { containerVariants, itemVariants, scaleVariants } from "@/theme/animations";
+import { GlassCard } from "@/components/ui/GlassCard";
 
 const Skills = () => {
+  const skillsColor = sectionColors.skills;
+  
   const skillCategories = [
     {
       name: "Languages",
       icon: Code,
+      color: "#6366F1", // indigo
       skills: ["JavaScript", "TypeScript", "Python", "Java"],
-      bgColor: "bg-[#D3E4FD]",
+      description: "Programming languages I'm proficient in, forming the foundation of my technical stack."
     },
     {
       name: "Frontend",
       icon: Layout,
+      color: "#EC4899", // pink
       skills: ["React.js", "React Native", "Angular", "Lit", "HTML5", "CSS3", "Figma Plugin Development", "Component Library Development", "SDK Development", "Design Systems"],
-      bgColor: "bg-[#D3E4FD]",
+      description: "Tools and frameworks I use to create beautiful, responsive user interfaces."
     },
     {
       name: "Backend",
       icon: Server,
-      skills: ["Firebase Realtime Database", "Firestore", "Cloud Functions", "Node.js", "RESTful APIs"],
-      bgColor: "bg-[#D3E4FD]",
-
+      color: "#10B981", // emerald
+      skills: [ "Cloud Functions", "Node.js", "Express.js",  "RESTful APIs"],
+      description: "Technologies I employ to build robust and scalable server-side applications."
     },
     {
       name: "Databases",
       icon: Database,
-      skills: ["MySQL"],
-      bgColor: "bg-[#D3E4FD]",
-
+      color: "#F59E0B", // amber
+      skills: ["MySQL", "NoSQL", "MongoDB", "Firebase Realtime Database", "Firestore"],
+      description: "Database systems I use to efficiently store and retrieve data."
     },
     {
       name: "Others",
       icon: Terminal,
+      color: "#8B5CF6", // violet
       skills: ["Git", "Linux", "Testing", "Debugging", "Agile", "SDLC", "ARIA", "Internationalization", "Problem-Solving"],
-      bgColor: "bg-[#D3E4FD]",
+      description: "Additional tools and methodologies that enhance my development workflow."
     }
   ];
 
   return (
-    <section id="skills" className="py-24 relative">
-      <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-secondary/50 to-transparent"></div>
+    <section id="skills" className="py-32 relative overflow-hidden">
+      <SectionBackground color={skillsColor} particleCount={20} />
       
-      {/* Gradient bg elements */}
-      <div className="absolute bottom-1/4 -left-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute top-1/3 -right-20 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
-      
-      <div className="relative z-10">
-        <motion.div 
-          className="max-w-3xl mx-auto text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
+        <motion.div
+          className="max-w-7xl mx-auto"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-anton uppercase mb-6">
-            Technical <span className="text-primary">Skills</span>
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            I specialize in these technologies and methodologies to build superior software solutions.
-          </p>
-        </motion.div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div 
-              key={category.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-            >
-              <div className={`relative p-px overflow-hidden rounded-xl bg-gradient-to-br from-primary/30 via-primary/20 to-transparent h-full ${category.bgColor} bg-opacity-10`}>
-                <div className="bg-background/60 backdrop-blur-sm p-6 rounded-xl h-full">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className={`w-10 h-10 ${category.bgColor} bg-opacity-10 rounded-full flex items-center justify-center`}>
-                      <category.icon size={20} />
+          <SectionTitle 
+            label="What I Know"
+            title="Technical Skills"
+            description="My toolkit for creating exceptional digital experiences"
+            color={skillsColor}
+          />
+          
+          <motion.div
+            className="grid grid-cols-1 gap-12"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {skillCategories.map((category, categoryIndex) => (
+              <motion.div 
+                key={category.name}
+                variants={itemVariants}
+              >
+                <GlassCard 
+                  color={category.color} 
+                  className="overflow-hidden"
+                  noPadding={true}
+                >
+                  <div 
+                    className="p-6 border-b border-border/40"
+                    style={{
+                      background: `linear-gradient(to right, ${category.color}15, transparent)`
+                    }}
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div 
+                        className="w-14 h-14 rounded-xl flex items-center justify-center"
+                        style={{ 
+                          backgroundColor: `${category.color}20`,
+                          color: category.color
+                        }}
+                      >
+                        <category.icon size={28} />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold" style={{ color: category.color }}>
+                          {category.name}
+                        </h3>
+                        <p className="text-muted-foreground">{category.description}</p>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold">{category.name}</h3>
                   </div>
                   
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill, index) => (
-                      <motion.span
-                        key={skill}
-                        className={`inline-block px-3 py-1 ${category.bgColor} bg-opacity-20 backdrop-blur-sm rounded-full text-sm font-medium`}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.3, delay: 0.2 + (index * 0.05) }}
-                      > 
-                        {skill}
-                      </motion.span>
-                    ))}
+                  <div className="p-6">
+                    <div className="flex flex-wrap gap-3">
+                      {category.skills.map((skill, skillIndex) => {
+                        // Select appropriate icon based on skill name
+                        let SkillIcon = Sparkles;
+                        if (skill.includes("React")) SkillIcon = Layers;
+                        else if (skill.includes("Script")) SkillIcon = Code;
+                        else if (skill.includes("API")) SkillIcon = Globe;
+                        else if (skill.includes("Firebase")) SkillIcon = Flame;
+                        else if (skill.includes("SQL")) SkillIcon = Database;
+                        else if (skill.includes("Testing")) SkillIcon = Dices;
+                        else if (skill.includes("Design")) SkillIcon = Hexagon;
+                        else if (skill.includes("Git")) SkillIcon = Cpu;
+                        else if (skill.includes("Problem")) SkillIcon = Zap;
+                        
+                        return (
+                          <motion.div
+                            key={skill}
+                            variants={scaleVariants}
+                            whileHover="hover"
+                            className="group"
+                            custom={skillIndex}
+                            transition={{ delay: skillIndex * 0.03 }}
+                          >
+                            <div 
+                              className="flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300"
+                              style={{ 
+                                backgroundColor: `${category.color}10`,
+                                borderColor: `${category.color}30`,
+                                color: category.color
+                              }}
+                            >
+                              <SkillIcon 
+                                size={16} 
+                                className="opacity-70 group-hover:opacity-100 transition-opacity" 
+                              />
+                              <span className="text-sm font-medium text-foreground">{skill}</span>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                </GlassCard>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

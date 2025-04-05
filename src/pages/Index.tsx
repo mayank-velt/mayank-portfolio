@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -16,6 +15,8 @@ import Hobbies from "@/components/Hobbies";
 import { useThemeStore } from "@/stores/useThemeStore";
 import { ArrowUp } from "lucide-react";
 import { Analytics } from '@vercel/analytics/react';  
+import { motion } from "framer-motion";
+import { sectionColors } from "@/theme/colors";
 
 const Index = () => {
   const { isDarkMode } = useThemeStore();
@@ -92,13 +93,28 @@ const Index = () => {
       
       {/* Back to top button */}
       {isVisible && (
-        <button 
+        <motion.button 
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 bg-gradient-to-r from-primary to-primary/80 text-white rounded-full shadow-lg md:flex items-center justify-center hover:shadow-xl transition-all z-20 animate-bounce"
+          className="fixed bottom-8 right-8 p-3 rounded-full shadow-lg z-20 backdrop-blur-md"
           aria-label="Back to top"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          whileHover={{ y: -5, scale: 1.05 }}
+          transition={{ duration: 0.2 }}
+          style={{ 
+            backgroundColor: `rgba(255, 255, 255, 0.1)`,
+            border: `1px solid rgba(255, 255, 255, 0.1)`,
+            boxShadow: `0 8px 32px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05)`
+          }}
         >
-          <ArrowUp className="h-6 w-6" />
-        </button>
+          <div className="relative">
+            <ArrowUp className="h-6 w-6 relative z-10" style={{ color: sectionColors.hero }} />
+            <div className="absolute inset-0 rounded-full opacity-20" style={{ 
+              background: `radial-gradient(circle, ${sectionColors.hero}, transparent)`,
+              filter: 'blur(8px)'
+            }}></div>
+          </div>
+        </motion.button>
       )}
     </div>
   );

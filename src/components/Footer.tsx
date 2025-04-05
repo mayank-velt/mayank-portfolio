@@ -1,108 +1,196 @@
-
-import { Heart, Terminal } from "lucide-react";
+import { Heart, Terminal, Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { sectionColors } from "@/theme/colors";
+import { motion } from "framer-motion";
+import { GlassCard } from "@/components/ui/GlassCard";
 
 const Footer = () => {
+  const contactColor = sectionColors.contact;
+
+  const quickLinks = [
+    { name: "About", href: "#about" },
+    { name: "Experience", href: "#experience" },
+    { name: "Achievements", href: "#achievements" },
+    { name: "Open Source", href: "#opensource" },
+    { name: "Contact", href: "#contact" }
+  ];
+
+  const socialLinks = [
+    { 
+      icon: Github, 
+      href: "https://github.com/mayank-96", 
+      label: "GitHub",
+      color: contactColor
+    },
+    { 
+      icon: Linkedin, 
+      href: "https://linkedin.com/in/mayank-pagar", 
+      label: "LinkedIn",
+      color: contactColor
+    },
+    { 
+      icon: Twitter, 
+      href: "https://x.com/mayankp09_", 
+      label: "Twitter",
+      color: contactColor
+    },
+    { 
+      icon: Mail, 
+      href: "mailto:pagarmayank07@gmail.com", 
+      label: "Email",
+      color: contactColor
+    }
+  ];
+
   return (
-    <footer className="py-12 border-t border-border">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="flex items-center justify-center p-2 bg-primary/10 rounded text-primary">
-                <Terminal size={20} className="text-primary" />
-              </div>
-              <div className="text-2xl font-mono font-bold text-foreground">
-                <span className="text-foreground">Mayank</span>
-              </div>
-            </div>
-            <p className="text-muted-foreground mb-2 max-w-md">
-              Software engineer specializing in building exceptional digital experiences with a focus on responsive design and clean code.
-            </p>
-          </div>
-          
-          <div className="md:col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="#experience" className="text-muted-foreground hover:text-primary transition-colors">
-                  Experience
-                </a>
-              </li>
-              <li>
-                <a href="#achievements" className="text-muted-foreground hover:text-primary transition-colors">
-                  Achievements
-                </a>
-              </li>
-              <li>
-                <a href="#opensource" className="text-muted-foreground hover:text-primary transition-colors">
-                  Open Source
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-          
-          <div className="md:col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Let's Connect</h3>
-            <div className="flex gap-4 mb-6">
-              <a 
-                href="https://github.com/mayank-96" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-background border border-border rounded-full flex items-center justify-center hover:bg-secondary transition-colors"
-                aria-label="GitHub"
+    <footer className="py-16 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-background via-secondary/10 to-background"></div>
+      
+      {/* Decorative blobs */}
+      <div className="absolute top-20 left-10 w-64 h-64" style={{ backgroundColor: `${contactColor}05`, borderRadius: '100%', filter: 'blur(100px)' }}></div>
+      <div className="absolute bottom-20 right-10 w-72 h-72" style={{ backgroundColor: `${contactColor}05`, borderRadius: '100%', filter: 'blur(80px)' }}></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <GlassCard color={contactColor} className="mb-10 overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="md:col-span-1">
+              <motion.div 
+                className="flex items-center gap-2 mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-                </svg>
-              </a>
-              <a 
-                href="https://linkedin.com/in/mayank-pagar" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-background border border-border rounded-full flex items-center justify-center hover:bg-secondary transition-colors"
-                aria-label="LinkedIn"
+                <div className="flex items-center justify-center p-2 rounded-lg" 
+                  style={{ backgroundColor: `${contactColor}20`}}>
+                  <Terminal size={20} style={{ color: contactColor }} />
+                </div>
+                <div className="text-2xl font-mono font-bold">
+                  <span>Mayank</span>
+                </div>
+              </motion.div>
+              <motion.p 
+                className="text-muted-foreground mb-4 max-w-md"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-              </a>
-              <a 
-                href="https://x.com/mayankp09_" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-background border border-border rounded-full flex items-center justify-center hover:bg-secondary transition-colors"
-                aria-label="Twitter"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                </svg>
-              </a>
+                Software engineer specializing in building exceptional digital experiences with a focus on responsive design and clean code.
+              </motion.p>
             </div>
             
-            <div className="text-muted-foreground">
-              <p>pagarmayank07@gmail.com</p>
-              <p>+91 7620415699</p>
-              <p>Nashik, India</p>
+            <div className="md:col-span-1">
+              <motion.h3 
+                className="text-lg font-semibold mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                Quick Links
+              </motion.h3>
+              <ul className="space-y-2">
+                {quickLinks.map((link, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                  >
+                    <a 
+                      href={link.href} 
+                      className="text-muted-foreground hover:text-foreground transition-colors duration-300 hover:pl-1"
+                    >
+                      {link.name}
+                    </a>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+            
+            <div className="md:col-span-1">
+              <motion.h3 
+                className="text-lg font-semibold mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                Let's Connect
+              </motion.h3>
+              <motion.div 
+                className="flex gap-4 mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                {socialLinks.map((social, index) => {
+                  const Icon = social.icon;
+                  return (
+                    <motion.a 
+                      key={index}
+                      href={social.href} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm"
+                      style={{ 
+                        backgroundColor: `rgba(255, 255, 255, 0.05)`,
+                        border: `1px solid rgba(255, 255, 255, 0.1)`,
+                        color: social.color
+                      }}
+                      aria-label={social.label}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
+                      whileHover={{ scale: 1.1, y: -5 }}
+                    >
+                      <Icon size={18} />
+                    </motion.a>
+                  );
+                })}
+              </motion.div>
+              
+              <motion.div 
+                className="text-muted-foreground space-y-2"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <p>pagarmayank07@gmail.com</p>
+                <p>+91 7620415699</p>
+                <p>Nashik, India</p>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </GlassCard>
         
-        <div className="mt-12 pt-8 border-t border-border text-center text-muted-foreground">
+        <motion.div 
+          className="text-center text-muted-foreground"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
           <p className="flex items-center justify-center gap-1">
             © {new Date().getFullYear()} Mayank Pagar. Made with 
-            <Heart size={16} className="text-primary" /> in Nashik, India
+            <motion.span 
+              initial={{ scale: 1 }}
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: Infinity,
+                repeatType: "loop" 
+              }}
+            >
+              <Heart size={16} style={{ color: contactColor }} />
+            </motion.span> 
+            in Nashik, India
           </p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

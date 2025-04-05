@@ -1,10 +1,15 @@
 import { Code } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { sectionColors } from "@/theme/colors";
+import { GlassCard } from "@/components/ui/GlassCard";
+import { SectionBackground } from "@/components/ui/SectionBackground";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const northernLightsRef = useRef<HTMLDivElement>(null);
+  const heroColor = sectionColors.hero;
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -29,11 +34,14 @@ const Hero = () => {
   }, [mousePosition]);
 
   return (
-    <section id="hero" className="relative overflow-hidden pt-32 pb-16 md:py-32" style={{
+    <section id="hero" className="relative overflow-hidden py-32" style={{
       minHeight: "100vh",
       display: "flex",
       alignItems: "center"
     }}>
+      <SectionBackground color={heroColor} disableParticles={true} />
+      
+      {/* Custom northern lights effect - kept separate from SectionBackground */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div 
           ref={northernLightsRef}
@@ -44,10 +52,9 @@ const Hero = () => {
             willChange: "transform"
           }}
         >
-          <div className="absolute top-[-10%] left-[5%] w-[50%] h-[50%] rounded-full bg-[#4F46E5] opacity-60"></div>
+          <div className="absolute top-[-10%] left-[5%] w-[50%] h-[50%] rounded-full opacity-60" style={{ backgroundColor: heroColor }}></div>
           <div className="absolute top-[20%] left-[10%] w-[65%] h-[50%] rounded-full bg-[#0EA5E9] opacity-50"></div>
           <div className="absolute bottom-[10%] right-[5%] w-[40%] h-[40%] rounded-full bg-[#8B5CF6] opacity-40"></div>
-          
           <div className="absolute bottom-[30%] left-[30%] w-[30%] h-[30%] rounded-full bg-[#3B82F6] opacity-30"></div>
         </div>
       </div>
@@ -62,32 +69,46 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-6xl md:text-8xl font-anton uppercase tracking-tight leading-none relative z-10">
-              <motion.span 
-                className="block bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
-                initial={{ x: -50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.6 }}
+            <div>
+              <motion.p
+                className="font-mono text-sm uppercase tracking-wider mb-4 relative z-10"
+                style={{ color: heroColor }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
               >
-                Front
-              </motion.span>
-              <motion.span 
-                className="block"
-                initial={{ x: 50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                End
-              </motion.span>
-              <motion.span 
-                className="block text-primary"
-                initial={{ x: -50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Developer
-              </motion.span>
-            </h1>
+                Welcome to my portfolio
+              </motion.p>
+              
+              <h1 className="text-6xl md:text-8xl font-anton uppercase tracking-tight leading-none relative z-10">
+                <motion.span 
+                  className="block bg-clip-text text-transparent"
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  style={{ backgroundImage: `linear-gradient(to right, ${heroColor}, ${heroColor}70)` }}
+                >
+                  Front
+                </motion.span>
+                <motion.span 
+                  className="block"
+                  initial={{ x: 50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                >
+                  End
+                </motion.span>
+                <motion.span 
+                  className="block"
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  style={{ color: heroColor }}
+                >
+                  Developer
+                </motion.span>
+              </h1>
+            </div>
             
             <motion.p 
               className="text-lg text-muted-foreground max-w-2xl"
@@ -107,19 +128,27 @@ const Hero = () => {
             >
               <a 
                 href="#contact" 
-                className="group relative px-8 py-3.5 bg-primary text-white font-medium uppercase tracking-wide inline-flex items-center transition-all duration-300 overflow-hidden rounded-lg"
+                className="group relative px-8 py-3.5 font-medium uppercase tracking-wide inline-flex items-center transition-all duration-300 overflow-hidden rounded-lg"
+                style={{ 
+                  backgroundColor: heroColor,
+                  color: "white"
+                }}
               >
                 <span className="relative z-10">Contact Me</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-primary-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                <span className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 <span className="absolute bottom-0 left-0 h-1 w-full bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
               </a>
               <a 
                 href="#projects" 
-                className="group relative px-8 py-3.5 border border-foreground/20 bg-background/50 backdrop-blur-sm text-foreground font-medium uppercase tracking-wide transition-all duration-300 overflow-hidden rounded-lg"
+                className="group relative px-8 py-3.5 border font-medium uppercase tracking-wide transition-all duration-300 overflow-hidden rounded-lg"
+                style={{ 
+                  borderColor: `${heroColor}30`,
+                  backgroundColor: "transparent"
+                }}
               >
                 <span className="relative z-10">View Work</span>
-                <span className="absolute inset-0 bg-foreground/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="absolute bottom-0 left-0 h-1 w-full bg-primary/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: `${heroColor}05` }}></span>
+                <span className="absolute bottom-0 left-0 h-1 w-full transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" style={{ backgroundColor: `${heroColor}30` }}></span>
               </a>
             </motion.div>
           </motion.div>
@@ -129,21 +158,22 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
+            whileHover={{ y: -8, transition: { duration: 0.3 } }}
           >
-            <div className="bg-background/40 backdrop-blur-xl p-7 lg:p-8 rounded-2xl shadow-xl relative z-10 border border-white/10 hover:border-primary/20 transition-all duration-300 hover:shadow-primary/5 group">
+            <GlassCard color={heroColor} className="p-7 lg:p-8 transition-all duration-300 group relative z-10">
               <div className="flex items-center gap-3 mb-5">
-                <div className="p-2.5 bg-primary/10 rounded-xl">
-                  <Code className="text-primary" size={24} />
+                <div className="p-2.5 rounded-xl" style={{ backgroundColor: `${heroColor}10` }}>
+                  <Code style={{ color: heroColor }} size={24} />
                 </div>
                 <div className="flex flex-col">
                   <p className="text-sm font-mono opacity-70">developer.profile</p>
-                  <div className="h-0.5 w-full bg-gradient-to-r from-primary/30 to-transparent mt-1 rounded-full"></div>
+                  <div className="h-0.5 w-full mt-1 rounded-full" style={{ background: `linear-gradient(to right, ${heroColor}30, transparent)` }}></div>
                 </div>
               </div>
               
               <div className="font-mono text-sm">
                 <div className="mb-3">
-                  <span className="text-primary">const</span> <span className="text-blue-600 dark:text-blue-400">developer</span> = {"{"}
+                  <span style={{ color: heroColor }}>const</span> <span className="text-blue-600 dark:text-blue-400">developer</span> = {"{"}
                 </div>
                 
                 <div className="pl-6 space-y-1.5">
@@ -176,15 +206,17 @@ const Hero = () => {
                 
                 <div className="mt-3">{"}"}</div>
               </div>
-            </div>
+            </GlassCard>
             
-            <div className="absolute -bottom-4 -right-4 w-full h-full bg-gradient-to-br from-primary/20 to-transparent rounded-2xl -z-10 blur-md"></div>
+            <div className="absolute -bottom-4 -right-4 w-full h-full rounded-2xl -z-10 blur-md" style={{ 
+              background: `linear-gradient(to bottom right, ${heroColor}20, transparent)`
+            }}></div>
           </motion.div>
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-10 w-32 h-32 border border-primary/20 rounded-full opacity-20 pointer-events-none"></div>
-      <div className="absolute top-32 right-10 w-16 h-16 border border-primary/20 rounded-full opacity-20 pointer-events-none"></div>
+      <div className="absolute bottom-10 left-10 w-32 h-32 border rounded-full opacity-20 pointer-events-none" style={{ borderColor: `${heroColor}20` }}></div>
+      <div className="absolute top-32 right-10 w-16 h-16 border rounded-full opacity-20 pointer-events-none" style={{ borderColor: `${heroColor}20` }}></div>
     </section>
   );
 };

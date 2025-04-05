@@ -1,9 +1,12 @@
-
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Calendar, Clock } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Briefcase, Calendar, Clock, Building, MapPin, ArrowRight, Star, CheckCircle, Rocket, Target, Zap } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
+import { containerVariants, itemVariants } from "@/theme/animations";
+import { SectionBackground } from "@/components/ui/SectionBackground";
+import { SectionTitle } from "@/components/ui/SectionTitle";
+import { sectionColors } from "@/theme/colors";
+import { GlassCard } from "@/components/ui/GlassCard";
 
 // Function to calculate experience duration
 const calculateDuration = (startDate: string, endDate: string = "Present") => {
@@ -144,6 +147,7 @@ const experiences = [
 const Experience = () => {
   const [activeTab, setActiveTab] = useState(experiences[0].id);
   const [includeInternships, setIncludeInternships] = useState(true);
+  const experienceColor = sectionColors.experience;
 
   // Calculate total experience
   const totalExperience = useMemo(() => {
@@ -182,36 +186,70 @@ const Experience = () => {
     }));
   }, []);
 
+  // Filter experiences based on internship toggle
+  const filteredExperiences = useMemo(() => {
+    return includeInternships 
+      ? experiencesWithDuration 
+      : experiencesWithDuration.filter(exp => !exp.isInternship);
+  }, [experiencesWithDuration, includeInternships]);
+
   return (
-    <section id="experience" className="py-24 bg-secondary/50 relative">
-      <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-background to-transparent"></div>
+    <section id="experience" className="py-32 relative overflow-hidden">
+      <SectionBackground color={experienceColor} />
       
-      <div className="container mx-auto px-4">
+      <div className="absolute left-4 md:left-20 top-40 bottom-40 w-0.5 hidden md:block" 
+        style={{
+          background: `linear-gradient(to bottom, ${experienceColor}05, ${experienceColor}40, ${experienceColor}05)`
+        }}
+      ></div>
+      
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
         <motion.div 
-          className="max-w-3xl mx-auto text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          className="max-w-7xl mx-auto"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Professional <span className="text-primary">Experience</span>
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            My journey as a software engineer, working with innovative teams and technologies.
-          </p>
-          
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <div className="inline-flex items-center justify-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium">
-              <Clock size={18} className="mr-2" />
-              <span>Total Experience: {totalExperience}</span>
-            </div>
+          <SectionTitle 
+            label="Career Timeline"
+            title="Professional Experience"
+            description="My journey as a software engineer, working with innovative teams and technologies to create impactful solutions."
+            color={experienceColor}
+          />
             
-            <div className="flex items-center space-x-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
+            <motion.div 
+              className="px-6 py-3 rounded-full text-primary font-medium flex items-center shadow-sm border"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+              style={{ 
+                backgroundColor: `${experienceColor}10`,
+                borderColor: `${experienceColor}30`,
+                color: experienceColor
+              }}
+            >
+              <Clock size={20} className="mr-2" style={{ color: experienceColor }} />
+              <span>Total Experience: {totalExperience}</span>
+            </motion.div>
+            
+            <motion.div 
+              className="flex items-center space-x-3 px-4 py-2 rounded-full border"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+              style={{ 
+                backgroundColor: `${experienceColor}05`,
+                borderColor: `${experienceColor}20`
+              }}
+            >
               <Switch 
                 id="include-internships" 
                 checked={includeInternships} 
                 onCheckedChange={setIncludeInternships}
+                className="data-[state=checked]:bg-primary"
+                style={{
+                  backgroundColor: includeInternships ? experienceColor : undefined
+                }}
               />
               <label 
                 htmlFor="include-internships" 
@@ -219,83 +257,162 @@ const Experience = () => {
               >
                 Include Internships
               </label>
-            </div>
+            </motion.div>
           </div>
-        </motion.div>
-        
-        <div className="max-w-4xl mx-auto">
-          <Tabs 
-            defaultValue={experiences[0].id} 
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="w-full"
-          >
-            <div className="mb-8 overflow-x-auto pb-3">
-              <TabsList className="bg-transparent space-x-2 sm:space-x-4 w-max">
-                {experiencesWithDuration.map((exp) => (
-                  <TabsTrigger 
-                    key={exp.id} 
-                    value={exp.id}
-                    className="px-4 py-3 data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-primary"
+          
+          <div className="grid grid-cols-1 lg:grid-cols-6 gap-8">
+            {/* Timeline navigation */}
+            <motion.div 
+              className="lg:col-span-2 order-2 lg:order-1"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="sticky top-28 space-y-3">
+                {filteredExperiences.map((exp, index) => (
+                  <motion.div
+                    key={exp.id}
+                    variants={itemVariants}
+                    className={`relative cursor-pointer group`}
+                    onClick={() => setActiveTab(exp.id)}
                   >
-                    {exp.company}
-                  </TabsTrigger>
+                    <div 
+                      className={`
+                        relative p-4 rounded-lg transition-all duration-300
+                        ${activeTab === exp.id ? 'shadow-sm' : 'hover:bg-secondary/50'}
+                        border ${activeTab === exp.id ? '' : 'border-transparent hover:border-border/50'}
+                      `}
+                      style={{
+                        backgroundColor: activeTab === exp.id ? `${experienceColor}10` : undefined,
+                        borderColor: activeTab === exp.id ? `${experienceColor}30` : undefined
+                      }}
+                    >
+                      {/* Timeline connector */}
+                      <div className="absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 hidden md:block">
+                        <div className={`w-4 h-4 rounded-full z-20`} style={{
+                          backgroundColor: activeTab === exp.id ? experienceColor : `${experienceColor}30`
+                        }}></div>
+                        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-background ${activeTab === exp.id ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></div>
+                      </div>
+                      
+                      <div className="flex items-start">
+                        <div className="flex-1">
+                          <h3 className={`font-bold transition-colors ${activeTab === exp.id ? '' : ''}`} style={{
+                            color: activeTab === exp.id ? experienceColor : undefined
+                          }}>
+                            {exp.company}
+                          </h3>
+                          <div className="flex items-center text-sm text-muted-foreground mt-1">
+                            <Calendar size={14} className="mr-1" />
+                            <span>{exp.period}</span>
+                          </div>
+                          <div className="flex items-center text-sm text-muted-foreground mt-1">
+                            <Briefcase size={14} className="mr-1" />
+                            <span>{exp.title}</span>
+                          </div>
+                        </div>
+                        <div className={`w-6 flex items-center justify-center transition-transform ${activeTab === exp.id ? 'rotate-0' : '-rotate-90'}`} style={{
+                          color: activeTab === exp.id ? experienceColor : undefined
+                        }}>
+                          <ArrowRight size={18} />
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
                 ))}
-              </TabsList>
-            </div>
+              </div>
+            </motion.div>
             
-            {experiencesWithDuration.map((exp) => (
-              <TabsContent key={exp.id} value={exp.id} className="mt-0">
-                <motion.div 
-                  className="bg-card rounded-lg p-6 border border-border shadow-sm"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-xl font-bold">{exp.title}</h3>
-                      <p className="text-primary font-medium">{exp.company}</p>
+            {/* Experience details */}
+            <motion.div 
+              className="lg:col-span-4 order-1 lg:order-2"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {filteredExperiences.map((exp) => (
+                activeTab === exp.id && (
+                  <GlassCard
+                    key={exp.id}
+                    color={experienceColor}
+                    className="overflow-hidden"
+                    hoverEffect={false}
+                    noPadding={true}
+                    variants={itemVariants}
+                  >
+                    {/* Header */}
+                    <div className="p-6" style={{ 
+                      background: `linear-gradient(to right, ${experienceColor}20, ${experienceColor}05)`
+                    }}>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="col-span-2">
+                          <h3 className="text-2xl font-bold mb-1">{exp.title}</h3>
+                          <div className="flex items-center text-lg font-medium">
+                            <Building size={18} className="mr-2" style={{ color: experienceColor }} />
+                            <span>{exp.company}</span>
+                          </div>
+                        </div>
+                        <div className="flex flex-col justify-center space-y-2">
+                          <div className="flex items-center text-sm text-muted-foreground">
+                            <Calendar size={16} className="mr-2" style={{ color: `${experienceColor}70` }} />
+                            <span>{exp.period}</span>
+                          </div>
+                          <div className="flex items-center text-sm text-muted-foreground">
+                            <Clock size={16} className="mr-2" style={{ color: `${experienceColor}70` }} />
+                            <span>{exp.duration}</span>
+                          </div>
+                          <div className="flex items-center text-sm text-muted-foreground">
+                            <MapPin size={16} className="mr-2" style={{ color: `${experienceColor}70` }} />
+                            <span>{exp.location}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     
-                    <div className="flex flex-wrap gap-4">
-                      <div className="flex items-center text-muted-foreground">
-                        <Calendar size={18} className="mr-2" />
-                        <span>{exp.period}</span>
-                      </div>
-                      <div className="flex items-center text-muted-foreground">
-                        <Clock size={18} className="mr-2" />
-                        <span>{exp.duration}</span>
-                      </div>
-                      <div className="flex items-center text-muted-foreground">
-                        <Briefcase size={18} className="mr-2" />
-                        <span>{exp.location}</span>
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-medium mb-3">Responsibilities:</h4>
-                      <ul className="space-y-2">
+                    {/* Content */}
+                    <div className="p-6">
+                      <h4 className="flex items-center text-xl font-bold mb-4">
+                        <Star className="mr-2" size={20} style={{ color: experienceColor }} />
+                        Key Responsibilities
+                      </h4>
+                      <ul className="space-y-4">
                         {exp.responsibilities.map((responsibility, index) => (
                           <motion.li 
                             key={index}
-                            className="flex items-start"
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.3, delay: index * 0.1 }}
+                            className="flex items-start p-4 rounded-lg border transition-all duration-300 hover:shadow-sm"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4, delay: index * 0.1 }}
+                            style={{
+                              backgroundColor: `${experienceColor}05`,
+                              borderColor: `${experienceColor}20`,
+                              borderWidth: "1px"
+                            }}
                           >
-                            <span className="text-primary mr-2 mt-1">•</span>
-                            <span>{responsibility}</span>
+                            <div className="mr-3 mt-1">
+                              <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{
+                                backgroundColor: `${experienceColor}20`,
+                                color: experienceColor
+                              }}>
+                                {index === 0 ? <Rocket size={14} /> : 
+                                 index === 1 ? <Zap size={14} /> : 
+                                 index === 2 ? <Target size={14} /> : 
+                                 <CheckCircle size={14} />}
+                              </div>
+                            </div>
+                            <div>{responsibility}</div>
                           </motion.li>
                         ))}
                       </ul>
                     </div>
-                  </div>
-                </motion.div>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </div>
+                  </GlassCard>
+                )
+              ))}
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
